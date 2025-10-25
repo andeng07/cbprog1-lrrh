@@ -3,9 +3,9 @@
 
 typedef enum ObjectDirection {
     UP,
+    RIGHT,
     DOWN,
     LEFT, 
-    RIGHT, 
     UNDEFINED
 } ObjectDirection;
 
