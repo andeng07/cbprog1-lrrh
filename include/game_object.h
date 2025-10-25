@@ -5,7 +5,7 @@ typedef enum ObjectDirection {
     UP,
     RIGHT,
     DOWN,
-    LEFT, 
+    LEFT,
     UNDEFINED
 } ObjectDirection;
 
@@ -39,6 +39,9 @@ typedef enum RotationDirection {
 void rotate(GameObject *obj, RotationDirection direction); 
 
 void set_pos(GameObject *obj, int x, int y);
+
+//  1: success, 2: failure
+int get_forward_coordinate(GameObject *object, int *outX, int *outY);
 
 GameObject *empty_game_object(int x, int y, Status status);
 
