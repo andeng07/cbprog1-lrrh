@@ -30,9 +30,10 @@ void destroy_game_board(GameBoard* board);
  * @param obj Pointer to the GameObject to place.
  * @param x X-coordinate of the target position.
  * @param y Y-coordinate of the target position.
- * @returns 1 on success (in bounds), 0 if out of bounds.
  */
-int place_object(GameBoard* board, GameObject *obj, int x, int y);
+void place_object(GameBoard *board, GameObject *obj, int x, int y);
+
+void move_object(GameBoard *board, int fromX, int fromY, int toX, int toY);
 
 /*
  * Retrieves an object at a specific game board cell.

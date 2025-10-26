@@ -28,14 +28,20 @@ void destroy_game_board(GameBoard* board) {
     free(board);
 }
 
-int place_object(GameBoard *board, GameObject *obj, int x, int y) {
+void place_object(GameBoard *board, GameObject *obj, int x, int y) {
     GameObject *occupant = &board->cells[y][x];
 
     board->cells[y][x] = *obj;
 
     set_pos(obj, x, y);
+}
 
-    return 1;
+void move_object(GameBoard *board, int fromX, int fromY, int toX, int toY) {
+    GameObject toMove = board->cells[fromY][fromX];
+
+    board->cells[fromY][fromX] = *empty_game_object(fromX, fromY, VISIBLE);
+
+    board->cells[toY][toX] = toMove;
 }
 
 GameObject *get_object_at_pos(GameBoard *board, int x, int y) {
