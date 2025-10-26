@@ -14,7 +14,7 @@ typedef struct GameBoard {
  * @param size The width and height of the square game board.
  * @returns Pointer to a newly allocated GameBoard instance, or NULL on failure.
  */
-GameBoard* create_game_board(int size);
+GameBoard *create_game_board(int size);
 
 /*
  * Deletes a GameBoard instance and frees all allocated memory.
@@ -30,7 +30,7 @@ void destroy_game_board(GameBoard* board);
  * @param obj Pointer to the GameObject to place.
  * @param x X-coordinate of the target position.
  * @param y Y-coordinate of the target position.
- * @returns 1 on success, 0 if the position is occupied.
+ * @returns 1 on success (in bounds), 0 if out of bounds.
  */
 int place_object(GameBoard* board, GameObject *obj, int x, int y);
 
@@ -43,6 +43,8 @@ int place_object(GameBoard* board, GameObject *obj, int x, int y);
  * @returns Pointer to the GameObject at the specified position,
  *          or NULL if the cell is out of bounds.
  */
-GameObject* get_object_at_pos(GameBoard *board, int x, int y);
+GameObject *get_object_at_pos(GameBoard *board, int x, int y);
+
+int is_valid_pos(GameBoard *board, int x, int y);
 
 #endif
