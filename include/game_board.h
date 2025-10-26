@@ -35,19 +35,6 @@ void destroy_game_board(GameBoard* board);
 int place_object(GameBoard* board, GameObject *obj, int x, int y);
 
 /*
- * Moves an object from its current location to a new location,
- * performing collision detection.
- *
- * @param board Pointer to the GameBoard.
- * @param obj Pointer to the GameObject to move.
- * @param newX X-coordinate of the target position.
- * @param newY Y-coordinate of the target position.
- * @param occupant Pointer that will be set to the object at the target location if it is occupied.
- * @returns 1 if the new location is empty and the move succeeds, 0 if the location is occupied.
- */
-int move_object(GameBoard* board, GameObject *obj, int newX, int newY, GameObject *occupant);
-
-/*
  * Retrieves an object at a specific game board cell.
  *
  * @param board Pointer to the GameBoard.
