@@ -29,8 +29,6 @@ void destroy_game_board(GameBoard* board) {
 }
 
 void place_object(GameBoard *board, GameObject *obj, int x, int y) {
-    GameObject *occupant = &board->cells[y][x];
-
     board->cells[y][x] = *obj;
 
     set_pos(obj, x, y);
