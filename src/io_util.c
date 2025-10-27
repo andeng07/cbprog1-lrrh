@@ -1,6 +1,7 @@
 #include "io_util.h"
 #include <stdio.h>
 #include <string.h>
+#include <conio.h>
 
 int input_in_range(char *prompt, int lower_bound, int upper_bound) {
     int value;
@@ -46,6 +47,19 @@ char input_in_set(char *prompt, char *valid_set) {
     } while (!is_valid);
 
     return value;
+}
+
+char listen_in_set(char *valid_set) {
+    int size = strlen(valid_set);
+
+    char value;
+    int is_valid = 0;
+
+    do {
+        
+    } while (!is_valid);
+
+    return value; 
 }
 
 void print_center(char *toPrint, int width) {
