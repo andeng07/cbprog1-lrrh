@@ -55,7 +55,7 @@ GameObject *get_object_at_pos(GameBoard *board, int x, int y) {
 int is_valid_pos(GameBoard *board, int x, int y) {
     int size = board->size;
 
-    if (x < 0 || x > size || y < 0 || y > size) {
+    if (x < 0 || x > size - 1 || y < 0 || y > size - 1) {
         return 0;
     }
 
