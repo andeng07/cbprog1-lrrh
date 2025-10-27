@@ -33,7 +33,7 @@ void destroy_game_board(GameBoard* board);
  */
 void place_object(GameBoard *board, GameObject *obj, int x, int y);
 
-void move_object(GameBoard *board, int fromX, int fromY, int toX, int toY);
+void move_object(GameBoard *board, GameObject *object, int toX, int toY);
 
 /*
  * Retrieves an object at a specific game board cell.

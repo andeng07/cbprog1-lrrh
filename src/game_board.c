@@ -36,12 +36,15 @@ void place_object(GameBoard *board, GameObject *obj, int x, int y) {
     set_pos(obj, x, y);
 }
 
-void move_object(GameBoard *board, int fromX, int fromY, int toX, int toY) {
-    GameObject toMove = board->cells[fromY][fromX];
+void move_object(GameBoard *board, GameObject *object, int toX, int toY) {
+    int fromX = object->x;
+    int fromY = object->y;
 
     board->cells[fromY][fromX] = *empty_game_object(fromX, fromY, VISIBLE);
 
-    board->cells[toY][toX] = toMove;
+    set_pos(object, toX, toY);
+
+    board->cells[toY][toX] = *object;
 }
 
 GameObject *get_object_at_pos(GameBoard *board, int x, int y) {
