@@ -13,6 +13,7 @@ typedef enum ObjectType {
     LITTLE_RED_RIDING_HOOD,
     GRANNY,
     PIT,
+    WOLF,
     WOODSMAN,
     BAKESHOP,
     FLOWER,
