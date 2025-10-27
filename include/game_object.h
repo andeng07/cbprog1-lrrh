@@ -46,4 +46,6 @@ int get_forward_coordinate(GameObject *object, int *outX, int *outY);
 
 GameObject *empty_game_object(int x, int y, Status status);
 
+char* get_type_name(ObjectType type);
+
 #endif // GAME_OBJECT_H

@@ -51,3 +51,18 @@ int get_forward_coordinate(GameObject *object, int *outX, int *outY) {
     
     return 1;
 }
+
+
+char* get_type_name(ObjectType type) {
+    switch (type) {
+        case LITTLE_RED_RIDING_HOOD: return "Little Red Riding Hood";
+        case GRANNY:                 return "Granny";
+        case PIT:                    return "Pit";
+        case WOODSMAN:               return "Woodsman";
+        case BAKESHOP:               return "Bakeshop";
+        case FLOWER:                 return "Flower";
+        case WOLF:                   return "Wolf";
+        case EMPTY:                  return "Empty";
+        default:                     return "Unknown";
+    }
+}
