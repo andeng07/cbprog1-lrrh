@@ -4,58 +4,46 @@
 
 int input_in_range(char *prompt, int lowerBound, int upperBound) {
     int value;
+    int valid = 0;
 
-    while (1) {
+    do {
         printf("%s: ", prompt);
 
         if (scanf("%d", &value) != 1) {
             printf("Invalid input. Please enter a number.\n");
-            while (getchar() != '\n');
-            continue;
-        }
-
-        if (value < lowerBound || value > upperBound) {
+        } else if (value < lowerBound || value > upperBound) {
             printf("Value must be between %d and %d.\n", lowerBound, upperBound);
-            continue;
+        } else {
+            valid = 1;
         }
-
+        
         while (getchar() != '\n');
-        return value;
-    }
+    } while (!valid);
+
+    return value;
 }
 
 char input_in_set(char *prompt, char *valid) {
-    int size = sizeof(valid) / sizeof(valid[0]);
+    int size = strlen(valid) / sizeof(valid[0]);
 
     char value;
-    int isValid;
+    int valid = 0;
 
     do {
         printf("%s: ", prompt);
 
         if (scanf(" %c", &value) != 1) {
             printf("Invalid input. Please enter a character.\n");
-            while (getchar() != '\n');
-            isValid = 0;
-            continue;
-        }
-
-        isValid = 0;
-        for (int i = 0; i < size; i++) {
-            if (value == valid[i]) {
-                isValid = 1;
-                break;
-            }
-        }
-
-        if (!isValid) {
-            printf("Invalid option. Please try again.\n");
-            while (getchar() != '\n');
         } else {
-            while (getchar() != '\n');
-            return value;
+            for (int i = 0; i < size; i++) {
+                if (valid[i] == value) valid = 1;
+            }
+
+            if (!valid) printf("Invalid option. Please try again.");
         }
-    } while (!isValid);
+
+        while (getchar() != '\n');
+    } while (!valid);
 
     return value;
 }
