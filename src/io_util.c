@@ -49,14 +49,18 @@ char input_in_set(char *prompt, char *valid_set) {
     return value;
 }
 
-char listen_in_set(char *valid_set) {
+char read_key_in_set(char *valid_set) {
     int size = strlen(valid_set);
 
     char value;
     int is_valid = 0;
 
     do {
-        
+        value = getch();
+
+        for (int i = 0; i < size; i++) {
+            if (value == valid_set[i]) is_valid = 1;
+        }
     } while (!is_valid);
 
     return value; 
