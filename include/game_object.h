@@ -20,7 +20,7 @@ typedef enum ObjectType {
 } ObjectType;
 
 typedef enum Status {
-    VISIBLE, HIDDEN
+    HIDDEN, VISIBLE
 } Status;
 
 typedef struct GameObject {
