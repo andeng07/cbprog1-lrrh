@@ -12,10 +12,18 @@ void input_object(GameBoard *board, ObjectType type, Status status) {
     int x, y;
     int size = board->size;
 
+    int isValid;
+
     do {
         x = input_in_range("\tx-coordinate", 1, size) - 1;
         y = input_in_range("\ty-coordinate", 1, size) - 1;
-    } while (get_object_at_pos(board, x, y)->type != EMPTY);
+
+        isValid = get_object_at_pos(board, x, y)->type == EMPTY;
+
+        if (!isValid) {
+            printf("\tCoordinate (%d, %d) already taken. Please try again.\n", x + 1, y + 1);
+        }
+    } while (!isValid);
 
     GameObject obj = (GameObject){ type, UNDEFINED, status, x, y };
 
