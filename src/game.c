@@ -8,13 +8,6 @@
 
 #define GAME_WIDTH 125
 
-void place_multiple_objects(GameBoard *board, ObjectType type, int count, Status status) {
-    for (int i = 0; i < count; i++) {
-        printf("Enter %s #%d location:\n", get_type_name(type), i + 1);
-        input_object(board, type, status);
-    }
-}
-
 void input_object(GameBoard *board, ObjectType type, Status status) {
     int x, y;
     int size = board->size;
@@ -24,49 +17,75 @@ void input_object(GameBoard *board, ObjectType type, Status status) {
         y = input_in_range("\ty-coordinate", 1, size) - 1;
     } while (get_object_at_pos(board, x, y)->type != EMPTY);
 
-    GameObject obj;
-    obj.type = type;
-    obj.direction = UNDEFINED;
-    obj.status = status;
-    obj.x = x;
-    obj.y = y;
+    GameObject obj = (GameObject){ type, UNDEFINED, status, x, y };
 
     place_object(board, &obj, x, y);
 }
 
-int process_move(GameBoard *board, GameObject *object, char move) {
+void place_multiple_objects(GameBoard *board, ObjectType type, int count, Status status) {
+    for (int i = 0; i < count; i++) {
+        printf("Enter %s #%d location:\n", get_type_name(type), i + 1);
+        input_object(board, type, status);
+    }
+}
+
+int process_move(Game *game, char move) {
+    GameBoard *board = game->board;
+    GameObject *player = game->player;
+    PlayerActions *actions = game->actions;
+
     switch (move) {
         case 'w': case 's': {
             int forwardX, forwardY;
-            get_forward_coordinate(object, &forwardX, &forwardY);
+            get_forward_coordinate(player, &forwardX, &forwardY);
 
             if (is_valid_pos(board, forwardX, forwardY)) {
                 GameObject *target = get_object_at_pos(board, forwardX, forwardY);
                 if (move == 'w' && target->type == EMPTY) {
-                    move_object(board, object, forwardX, forwardY);
+                    move_object(board, player, forwardX, forwardY);
+                    actions->forward++;
                 } else if (move == 's' && target != NULL) {
-                    target->status = VISIBLE;
+                    if (target->status == HIDDEN) {
+                        target->status = VISIBLE;
+                        actions->sense++;
+                    }
                 }
             }
             break;
         }
-        case 'a':
-            rotate(object, ROTATE_LEFT);
-            place_object(board, object, object->x, object->y);
+        case 'a': case 'd': {
+            RotationDirection rotation = move == 'a' ? ROTATE_LEFT : ROTATE_RIGHT;
+
+            rotate(player, rotation);
+            place_object(board, player, player->x, player->y);
+
+            actions->rotate++;
             break;
-        case 'd':
-            rotate(object, ROTATE_RIGHT);
-            place_object(board, object, object->x, object->y);
-            break;
+        }
     }
+
     return 0;
 }
 
 void game_loop(GameBoard *board, GameObject *player) {
-    int is_alive = 1;
+    Game game;
 
-    do {
+    game.board = board;
+    game.player = player;
+
+    game.actions = &(PlayerActions){ 0, 0, 0 };
+
+    game.is_alive = 1;
+
+    game.status = 0;
+
+    while(game.is_alive) {
         print_board(board, GAME_WIDTH);
+
+        printf("=====DASHBOARD=======\n");
+        printf("Forward: %d\n", game.actions->forward);
+        printf("Rotation: %d\n", game.actions->rotate);
+        printf("Sense: %d\n", game.actions->sense);
 
         char move;
         int valid = 0;
@@ -78,9 +97,9 @@ void game_loop(GameBoard *board, GameObject *player) {
                 if (validMoves[i] == move) valid = 1;
         }
 
-        process_move(board, player, move);
+        process_move(&game, move);
         system("cls");
-    } while (is_alive);
+    }
 }
 
 void run() {
@@ -109,10 +128,10 @@ void run() {
     input_object(board, WOLF, HIDDEN);
 
     printf("Enter Woodsman location:\n");
-     input_object(board, WOODSMAN, VISIBLE);
+    input_object(board, WOODSMAN, HIDDEN);
 
     printf("Enter Granny location:\n");
-    input_object(board, GRANNY, VISIBLE);
+    input_object(board, GRANNY, HIDDEN);
 
     printf("\n");
 

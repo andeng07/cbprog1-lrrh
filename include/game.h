@@ -15,12 +15,12 @@ typedef struct PlayerActions {
 } PlayerActions;
 
 typedef struct Game {
-    GameBoard board;
-    GameObject player;
+    GameBoard *board;
+    GameObject *player;
     
     int is_alive;
 
-    PlayerActions actions;
+    PlayerActions *actions;
 
     int status; // flags
 } Game;
