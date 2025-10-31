@@ -25,7 +25,7 @@ GameObject *empty_game_object(int x, int y, Status status) {
     return obj;
 }
 
-int get_forward_coordinate(GameObject *object, int *outX, int *outY) {
+int get_forward_coordinate(GameObject *object, int *out_x, int *out_y) {
     if (object->direction == UNDEFINED) return 0;
 
     int deltaX = 0, deltaY = 0;
@@ -48,8 +48,8 @@ int get_forward_coordinate(GameObject *object, int *outX, int *outY) {
             break;
     }
 
-    *outX = object->x + deltaX;
-    *outY = object->y + deltaY;
+    *out_x = object->x + deltaX;
+    *out_y = object->y + deltaY;
     
     return 1;
 }

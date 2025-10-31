@@ -58,6 +58,7 @@ char read_key_in_set(char *valid_set) {
     do {
         value = getch();
 
+        // perform a linear search
         for (int i = 0; i < size; i++) {
             if (value == valid_set[i]) is_valid = 1;
         }
@@ -66,10 +67,11 @@ char read_key_in_set(char *valid_set) {
     return value; 
 }
 
-void print_center(char *toPrint, int width) {
-    int len = strlen(toPrint);
+void print_center(char *to_print, int width) {
+    int len = strlen(to_print);
+
     int paddingLeft = (width - len) / 2;
     int paddingRight = width - (len + paddingLeft);
 
-    printf("%*s%s%*s\n", paddingLeft, "", toPrint, paddingRight, "");
+    printf("%*s%s%*s\n", paddingLeft, "", to_print, paddingRight, "");
 }
