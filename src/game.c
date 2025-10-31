@@ -54,9 +54,7 @@ int process_move(Game *game, char move) {
             break;
         }
         case 'a': case 'd': {
-            RotationDirection rotation = move == 'a' ? ROTATE_LEFT : ROTATE_RIGHT;
-
-            rotate(player, rotation);
+            rotate(player);
             place_object(board, player, player->x, player->y);
 
             actions->rotate++;

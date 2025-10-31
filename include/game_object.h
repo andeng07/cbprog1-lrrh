@@ -32,12 +32,7 @@ typedef struct GameObject {
     int y;
 } GameObject;
 
-typedef enum RotationDirection {
-    ROTATE_LEFT,
-    ROTATE_RIGHT
-} RotationDirection;
-
-void rotate(GameObject *obj, RotationDirection direction); 
+void rotate(GameObject *obj); 
 
 void set_pos(GameObject *obj, int x, int y);
 

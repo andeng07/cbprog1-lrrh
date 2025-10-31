@@ -1,10 +1,10 @@
 #include <stdlib.h>
 #include "game_object.h"
 
-void rotate(GameObject *obj, RotationDirection direction) {
+void rotate(GameObject *obj) {
     if (obj->direction == UNDEFINED) return;
 
-    int delta = (direction == ROTATE_RIGHT) ? 1 : -1;
+    int delta = 1;
 
     // add 4 padding to avoid negative value
     obj->direction = (obj->direction + delta + 4) % 4;
