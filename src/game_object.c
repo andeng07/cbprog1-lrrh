@@ -44,6 +44,9 @@ int get_forward_coordinate(GameObject *object, int *outX, int *outY) {
         case LEFT:
             deltaX = -1;
             break;
+        default:
+            return 0;
+            break;
     }
 
     *outX = object->x + deltaX;
