@@ -6,8 +6,7 @@ void rotate(GameObject *obj) {
 
     int delta = 1;
 
-    // add 4 padding to avoid negative value
-    obj->direction = (obj->direction + delta + 4) % 4;
+    obj->direction = (obj->direction + delta) % 4;
 }
 
 void set_pos(GameObject *obj, int x, int y) {
