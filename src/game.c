@@ -155,10 +155,9 @@ int processMove(Game *pGame, char cMove) {
 }
 
 void gameLoop(GameBoard *pBoard, GameObject *pPlayer) {
-    int i, isValid;
     char move;
 
-    char validMoves[] = { 'w','a','s','d' };
+    char validMoves[] = { 'w','a','s','d','q' };
 
     Game game;
     PlayerActions actions = {0, 0, 0};
@@ -180,16 +179,14 @@ void gameLoop(GameBoard *pBoard, GameObject *pPlayer) {
         printf("Rotation: %d\n", game.pActions->nRotate);
         printf("Sense: %d\n", game.pActions->nSense);
 
-        isValid = 0;
-
-        while (!isValid) {
-            move = getch();
-            for (i = 0; i < 4; i++)
-                if (validMoves[i] == move) isValid = 1;
-        }
+        move = readKeyInSet(validMoves);
 
         system("cls");
 
         processMove(&game, move);
+
+        if (move == 'q') {
+            game.nIsAlive = 0;
+        }
     }
 }
