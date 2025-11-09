@@ -37,12 +37,17 @@ typedef struct GameObject {
     int nPosY; /* Y-coordinate of the object on the pBoard */
 } GameObject;
 
+typedef enum RotationDirection {
+    ROTATE_LEFT,
+    ROTATE_RIGHT
+} RotationDirection;
+
 /* Rotates the object 90 degrees clockwise.
  * Precondition: pObj must not be NULL.
  * @param pObj Pointer to the GameObject to rotate.
  * @return None.
  */
-void rotate(GameObject *pObj);
+void rotate(GameObject *pObj, RotationDirection direction);
 
 /* Sets the position of a GameObject.
  * Precondition: pObj must not be NULL.

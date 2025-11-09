@@ -1,14 +1,15 @@
 #include <stdlib.h>
 #include "game_object.h"
 
-void rotate(GameObject *pObj) {
+void rotate(GameObject *pObj, RotationDirection direction) {
     int delta = 0;
 
     if (pObj->direction == UNDEFINED) return;
 
-    delta = 1;
+    delta = (direction == ROTATE_RIGHT) ? -1 : 1;
 
-    pObj->direction = (pObj->direction + delta) % 4;
+    /* add 4 to avoid processing negative values */
+    pObj->direction = (pObj->direction + delta + 4) % 4;
 }
 
 void setPosition(GameObject *pObj, int nPosX, int nPosY) {
