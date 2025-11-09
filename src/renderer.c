@@ -1,15 +1,12 @@
 #include "renderer.h"
 #include "io_util.h"
 #include <stdlib.h>
+#include <stdio.h>
 
-void print_board(GameBoard *board, int width) {
+void print_board(GameBoard *board) {
     int size = board->size;
-    int rowLength = size * 2 + 1;
 
     for (int i = 0; i < size; i++) {
-        char* row = malloc(rowLength * sizeof(char));
-        int index = 0;
-
         for (int j = 0; j < size; j++) {
             GameObject obj = board->cells[i][j];
             char landmark = ' ';
@@ -36,18 +33,14 @@ void print_board(GameBoard *board, int width) {
                     case EMPTY: landmark = ' '; break;
                 }
             }
-
-            row[index++] = landmark;
-            row[index++] = ' ';
+            printf("%c ", landmark);
         }
-
-        row[index] = '\0';
-        print_center(row, width);
-        free(row);
+        printf("\n");
     }
+
 }
 
-void print_title(int width) {
+void print_title() {
     char *frame[] = {
         "__| |______________________________________________________________________________________________________| |__",
         "__   ______________________________________________________________________________________________________   __",
@@ -70,6 +63,6 @@ void print_title(int width) {
     int lineCount = sizeof(frame) / sizeof(frame[0]);
 
     for (int i = 0; i < lineCount; i++) {
-        print_center(frame[i], width);
+        printf("%s\n", frame[i]);
     }
 }

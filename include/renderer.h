@@ -8,12 +8,12 @@
  * @param board Pointer to the GameBoard to render.
  * @param width The console width used for alignment or centering.
  */
-void print_board(GameBoard *board, int width);
+void print_board(GameBoard *board);
 
 /* Prints the game title or banner centered within the given width.
  * Precondition: none.
  * @param width The total width of the display area.
  */
-void print_title(int width);
+void print_title();
 
 #endif // RENDERER_H
