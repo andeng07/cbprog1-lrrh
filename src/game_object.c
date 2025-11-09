@@ -93,7 +93,7 @@ ObjectTypeMetadata *getTypeMetadata(ObjectType type) {
             metadata->type = WOODSMAN;
             metadata->pName = "Woodsman";
             metadata->pSenseName = "Sound";
-            metadata->cLandmark = 'W';
+            metadata->cLandmark = 'M';
             break;
         }
         case BAKESHOP: {
