@@ -13,6 +13,32 @@ This project was developed for **CBPROG1 – Machine Project** under the **CCS B
 
 ---
 
+## 🚀 Clone and Run
+1. **Clone the repository**:
+
+```bash
+git clone https://github.com/andeng07/cbprog1-lrrh.git
+cd cbprog1-lrrh
+```
+
+2. **Compile the source code**:
+```bash
+gcc -Iinclude -Wall -std=c99 src/*.c -o bin/out
+```
+
+3. **Run the game**:
+
+Windows:
+```bash
+bin\out.exe
+```
+Linux/macOS:
+```bash
+./bin/out
+```
+
+---
+
 ## 🧩 Programming Concepts Demonstrated
 
 | Concept | Description |
@@ -54,7 +80,7 @@ Reach Granny’s house safely **with both bread and flowers**, and **with the Wo
 
 ## ⚙️ Built With
 
-- **C Programming Language** – Core game logic, data handling, and memory management
+- **C Programming Language**
 
 ---
 
