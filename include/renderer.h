@@ -3,17 +3,17 @@
 
 #include "game.h"
 
-/* Prints the current state of the game board to the console.
- * Precondition: board is not NULL.
- * @param board Pointer to the GameBoard to render.
+/* Prints the current state of the game pBoard to the console.
+ * Precondition: pBoard is not NULL.
+ * @param pBoard Pointer to the GameBoard to render.
  * @param width The console width used for alignment or centering.
  */
-void print_board(GameBoard *board);
+void printBoard(GameBoard *pBoard);
 
 /* Prints the game title or banner centered within the given width.
  * Precondition: none.
  * @param width The total width of the display area.
  */
-void print_title();
+void printTitle(void);
 
-#endif // RENDERER_H
+#endif /* RENDERER_H */

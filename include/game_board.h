@@ -8,63 +8,63 @@
  * dynamically allocated 2D array.
  */
 typedef struct GameBoard {
-    int size;            // The width and height of the square board (8–15).
-    GameObject **cells;  // 2D array of GameObject pointers representing the board cells.
+    int nSize;            /* The width and height of the square pBoard (8–15). */
+    GameObject **cells;   /* 2D array of GameObject pointers representing the pBoard cells. */
 } GameBoard;
 
 /* Creates and initializes a new GameBoard instance.
- * Precondition: size must be between 8 and 15 (inclusive).
- * @param size The width and height of the game board.
+ * Precondition: nSize must be between 8 and 15 (inclusive).
+ * @param nSize The width and height of the game pBoard.
  * @return Pointer to a newly allocated GameBoard instance, or NULL if allocation fails.
  */
-GameBoard *create_game_board(int size);
+GameBoard *createGameBoard(int nSize);
 
 /* Frees all memory associated with a GameBoard instance.
- * Precondition: board must not be NULL.
- * @param board Pointer to the GameBoard to destroy.
+ * Precondition: pBoard must not be NULL.
+ * @param pBoard Pointer to the GameBoard to destroy.
  * @return None.
  */
-void destroy_game_board(GameBoard *board);
+void destroyGameBoard(GameBoard *pBoard);
 
-/* Places a GameObject at a specific position on the board.
+/* Places a GameObject at a specific position on the pBoard.
  * If another object already exists at that position, it will be replaced.
- * Precondition: x and y must be within the board bounds (0 ≤ x < size, 0 ≤ y < size).
- * @param board Pointer to the target GameBoard.
- * @param obj Pointer to the GameObject to place.
- * @param x The X-coordinate (column index).
- * @param y The Y-coordinate (row index).
+ * Precondition: nPosX and nPosY must be within the pBoard bounds (0 ≤ nPosX < nSize, 0 ≤ nPosY < nSize).
+ * @param pBoard Pointer to the target GameBoard.
+ * @param pObj Pointer to the GameObject to place.
+ * @param nPosX The X-coordinate (column index).
+ * @param nPosY The Y-coordinate (row index).
  * @return None.
  */
-void place_object(GameBoard *board, GameObject *obj, int x, int y);
+void placeObject(GameBoard *pBoard, GameObject *pObj, int nPosX, int nPosY);
 
-/* Moves a GameObject to a new position on the board.
- * Removes the object from its current position and places it at the target coordinates.
- * Any existing object at the destination will be replaced.
- * Precondition: board and object must not be NULL; to_x and to_y must be within bounds.
- * @param board Pointer to the GameBoard.
- * @param object Pointer to the GameObject to move.
- * @param to_x The destination X-coordinate.
- * @param to_y The destination Y-coordinate.
+/* Moves a GameObject to a new position on the pBoard.
+ * Removes the pObj from its current position and places it at the target coordinates.
+ * Any existing pObj at the destination will be replaced.
+ * Precondition: pBoard and pObj must not be NULL; nDestX and nDestY must be within bounds.
+ * @param pBoard Pointer to the GameBoard.
+ * @param pObj Pointer to the GameObject to move.
+ * @param nDestX The destination X-coordinate.
+ * @param nDestY The destination Y-coordinate.
  * @return None.
  */
-void move_object(GameBoard *board, GameObject *object, int to_x, int to_y);
+void moveObject(GameBoard *pBoard, GameObject *pObj, int nDestX, int nDestY);
 
-/* Retrieves the GameObject located at a specific board position.
- * Precondition: x and y must be within bounds.
- * @param board Pointer to the GameBoard.
- * @param x The X-coordinate of the cell.
- * @param y The Y-coordinate of the cell.
+/* Retrieves the GameObject located at a specific pBoard position.
+ * Precondition: nPosX and nPosY must be within bounds.
+ * @param pBoard Pointer to the GameBoard.
+ * @param nPosX The X-coordinate of the cell.
+ * @param nPosY The Y-coordinate of the cell.
  * @return Pointer to the GameObject at the given position, or NULL if the cell is empty.
  */
-GameObject *get_object_at_pos(GameBoard *board, int x, int y);
+GameObject *getObjectAtPosition(GameBoard *pBoard, int nPosX, int nPosY);
 
-/* Checks if a given position is within the bounds of the board.
- * Precondition: board must not be NULL.
- * @param board Pointer to the GameBoard.
- * @param x The X-coordinate to check.
- * @param y The Y-coordinate to check.
+/* Checks if a given position is within the bounds of the pBoard.
+ * Precondition: pBoard must not be NULL.
+ * @param pBoard Pointer to the GameBoard.
+ * @param nPosX The X-coordinate to check.
+ * @param nPosY The Y-coordinate to check.
  * @return 1 if the position is valid; 0 otherwise.
  */
-int is_valid_pos(GameBoard *board, int x, int y);
+int isValidPosition(GameBoard *pBoard, int nPosX, int nPosY);
 
-#endif // GAME_BOARD_H
+#endif /* GAME_BOARD_H */

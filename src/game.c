@@ -6,103 +6,119 @@
 #include "io_util.h"
 #include "renderer.h"
 
-void input_object(GameBoard *board, ObjectType type, Status status);
-void input_multiple_objects(GameBoard *board, ObjectType type, int count, Status status);
-int process_move(Game *game, char move);
-void game_loop(GameBoard *board, GameObject *player);
+void inputObject(GameBoard *pBoard, ObjectType type, Status status);
+void inputMultipleObjects(GameBoard *pBoard, ObjectType type, int nCount, Status status);
+int processMove(Game *pGame, char cMove);
+void gameLoop(GameBoard *pBoard, GameObject *pPlayer);
 
-void run() {
-    // screen title
-    print_title();
+void run(void) {
+    char cChoice;
 
-    char choice = input_in_set("Press [P] to Play or [Q] to Quit: ", (char[]){'P','p','Q','q'});
+    int nBoardSize, nPitCount, nFlowerCount;
 
-    if (choice == 'Q' || choice == 'q') {
+    char aScreenTitleChoices[4] = {'P', 'p', 'Q', 'q'};
+
+    GameBoard *pBoard;
+
+    GameObject player = {LITTLE_RED_RIDING_HOOD, DOWN, VISIBLE, 0, 0};
+
+    /* screen title */
+    printTitle();
+
+    cChoice = inputInSet("Press [P] to Play or [Q] to Quit", aScreenTitleChoices);
+
+    if (cChoice == 'Q' || cChoice == 'q') {
         printf("Goodbye!\n");
         return;
     }
 
-    // initialize board
-    int board_size = input_in_range("Enter board size", 8, 15);
-    GameBoard *board = create_game_board(board_size);
+    /* initialize pBoard */
+    nBoardSize = inputInRange("Enter pBoard nSize", 8, 15);
+    pBoard = createGameBoard(nBoardSize);
 
-    // place player-controlled character
-    GameObject player = {LITTLE_RED_RIDING_HOOD, DOWN, VISIBLE, 0, 0};
-    place_object(board, &player, 0, 0);
+    /* place player-controlled character */
+    placeObject(pBoard, &player, 0, 0);
 
-    // map configuration
-    int pits_count = input_in_range("Enter number of Pits in the map", 1, board->size);
-    input_multiple_objects(board, PIT, pits_count, HIDDEN);
+    /* map configuration */
+    nPitCount = inputInRange("Enter number of Pits in the map", 1, pBoard->nSize);
+    inputMultipleObjects(pBoard, PIT, nPitCount, HIDDEN);
 
-    int flowers_count = input_in_range("Enter number of Flowers in the map", 1, board->size);
-    input_multiple_objects(board, FLOWER, flowers_count, HIDDEN);
+    nFlowerCount = inputInRange("Enter number of Flowers in the map", 1, pBoard->nSize);
+    inputMultipleObjects(pBoard, FLOWER, nFlowerCount, HIDDEN);
 
     printf("Enter Wolf location:\n");
-    input_object(board, WOLF, HIDDEN);
+    inputObject(pBoard, WOLF, HIDDEN);
 
     printf("Enter Woodsman location:\n");
-    input_object(board, WOODSMAN, HIDDEN);
+    inputObject(pBoard, WOODSMAN, HIDDEN);
 
     printf("Enter Granny location:\n");
-    input_object(board, GRANNY, HIDDEN);
+    inputObject(pBoard, GRANNY, HIDDEN);
 
     printf("\n");
 
-    // start game
-    game_loop(board, &player);
+    /* start game */
+    gameLoop(pBoard, &player);
 
-    // free memory once done
-    destroy_game_board(board);
+    /* free memory once done */
+    destroyGameBoard(pBoard);
 }
 
-void input_object(GameBoard *board, ObjectType type, Status status) {
-    int x, y;
-    int size = board->size;
+void inputObject(GameBoard *pBoard, ObjectType type, Status status) {
+    int nPosX, nPosY;
+    int nSize = pBoard->nSize;
 
-    int is_valid;
+    GameObject obj = { EMPTY, UNDEFINED, HIDDEN, -1, -1 };
+
+    int nIsValid;
 
     do {
-        x = input_in_range("\tx-coordinate", 1, size) - 1;
-        y = input_in_range("\ty-coordinate", 1, size) - 1;
+        nPosX = inputInRange("\tx-coordinate", 1, nSize) - 1;
+        nPosY = inputInRange("\ty-coordinate", 1, nSize) - 1;
 
-        is_valid = get_object_at_pos(board, x, y)->type == EMPTY;
+        nIsValid = getObjectAtPosition(pBoard, nPosX, nPosY)->type == EMPTY;
 
-        if (!is_valid) {
-            printf("\tCoordinate (%d, %d) already taken. Please try again.\n", x + 1, y + 1);
+        if (!nIsValid) {
+            printf("\tCoordinate (%d, %d) already taken. Please try again.\n", nPosX + 1, nPosY + 1);
         }
-    } while (!is_valid);
+    } while (!nIsValid);
 
-    GameObject obj = (GameObject){ type, UNDEFINED, status, x, y };
+    obj.type = type;
+    obj.status = status;
+    obj.nPosX = nPosX;
+    obj.nPosY = nPosY;
 
-    place_object(board, &obj, x, y);
+    placeObject(pBoard, &obj, nPosX, nPosY);
 }
 
-void input_multiple_objects(GameBoard *board, ObjectType type, int count, Status status) {
-    for (int i = 0; i < count; i++) {
-        printf("Enter %s #%d location:\n", get_type_name(type), i + 1);
-        input_object(board, type, status);
+void inputMultipleObjects(GameBoard *pBoard, ObjectType type, int nCount, Status status) {
+    int i;
+
+    for (i = 0; i < nCount; i++) {
+        printf("Enter %s #%d location:\n", getTypeName(type), i + 1);
+        inputObject(pBoard, type, status);
     }
 }
 
-int process_move(Game *game, char move) {
-    GameBoard *board = game->board;
-    GameObject *player = game->player;
-    PlayerActions *actions = game->actions;
+int processMove(Game *pGame, char cMove) {
+    GameBoard *board = pGame->pBoard;
+    GameObject *player = pGame->pPlayer;
+    PlayerActions *actions = pGame->pActions;
 
-    switch (move) {
+    switch (cMove) {
         case 'w': case 's': {
             int forwardX, forwardY;
-            get_forward_coordinate(player, &forwardX, &forwardY);
+            getForwardCoordinate(player, &forwardX, &forwardY);
 
-            if (is_valid_pos(board, forwardX, forwardY)) {
-                GameObject *target = get_object_at_pos(board, forwardX, forwardY);
-                if (move == 'w' && target->type == EMPTY) {
-                    move_object(board, player, forwardX, forwardY);
-                    actions->forward++;
-                } else if (move == 's' && target != NULL) {
+            if (isValidPosition(board, forwardX, forwardY)) {
+                GameObject *target = getObjectAtPosition(board, forwardX, forwardY);
+                if (cMove == 'w' && target->type == EMPTY) {
+                    moveObject(board, player, forwardX, forwardY);
+                    actions->nForward++;
+                } else if (cMove == 's' && target != NULL) {
                     if (target->status == HIDDEN) {
                         target->status = VISIBLE;
-                        actions->sense++;
+                        actions->nSense++;
                     }
                 }
             }
@@ -110,9 +126,9 @@ int process_move(Game *game, char move) {
         }
         case 'a': case 'd': {
             rotate(player);
-            place_object(board, player, player->x, player->y);
+            placeObject(board, player, player->nPosX, player->nPosY);
 
-            actions->rotate++;
+            actions->nRotate++;
             break;
         }
     }
@@ -120,37 +136,42 @@ int process_move(Game *game, char move) {
     return 0;
 }
 
-void game_loop(GameBoard *board, GameObject *player) {
+void gameLoop(GameBoard *pBoard, GameObject *pPlayer) {
+    int i, isValid;
+    char move;
+
+    char validMoves[] = { 'w','a','s','d' };
+
     Game game;
+    PlayerActions actions = {0, 0, 0};
 
-    game.board = board;
-    game.player = player;
+    game.pBoard = pBoard;
+    game.pPlayer = pPlayer;
 
-    game.actions = &(PlayerActions){ 0, 0, 0 };
+    game.nIsAlive = 1;
 
-    game.is_alive = 1;
+    game.nStatus = 0;
 
-    game.status = 0;
+    game.pActions = &actions;
 
-    while(game.is_alive) {
-        print_board(board);
+    while(game.nIsAlive) {
+        printBoard(pBoard);
 
         printf("=====DASHBOARD=======\n");
-        printf("Forward: %d\n", game.actions->forward);
-        printf("Rotation: %d\n", game.actions->rotate);
-        printf("Sense: %d\n", game.actions->sense);
+        printf("Forward: %d\n", game.pActions->nForward);
+        printf("Rotation: %d\n", game.pActions->nRotate);
+        printf("Sense: %d\n", game.pActions->nSense);
 
-        char move;
-        int valid = 0;
-        char validMoves[] = { 'w','a','s','d' };
 
-        while (!valid) {
+        isValid = 0;
+
+        while (!isValid) {
             move = getch();
-            for (int i = 0; i < 4; i++)
-                if (validMoves[i] == move) valid = 1;
+            for (i = 0; i < 4; i++)
+                if (validMoves[i] == move) isValid = 1;
         }
 
-        process_move(&game, move);
+        processMove(&game, move);
         system("cls");
     }
 }

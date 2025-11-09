@@ -7,12 +7,12 @@ typedef enum ObjectDirection {
     RIGHT,
     DOWN,
     LEFT,
-    UNDEFINED // Direction not specified
+    UNDEFINED /* Direction not specified */
 } ObjectDirection;
 
-/* Enumerates all possible object types that can exist on the game board. */
+/* Enumerates all possible object types that can exist on the game pBoard. */
 typedef enum ObjectType {
-    LITTLE_RED_RIDING_HOOD, // Player-controlled character
+    LITTLE_RED_RIDING_HOOD, /* Player-controlled character */
     GRANNY,
     PIT,
     WOLF,
@@ -22,7 +22,7 @@ typedef enum ObjectType {
     EMPTY
 } ObjectType;
 
-/* Indicates the visibility status of an object. */
+/* Indicates the visibility nStatus of an object. */
 typedef enum Status {
     HIDDEN,
     VISIBLE
@@ -33,49 +33,49 @@ typedef struct GameObject {
     ObjectType type;
     ObjectDirection direction;
     Status status;
-    int x; // X-coordinate of the object on the board
-    int y; // Y-coordinate of the object on the board
+    int nPosX; /* X-coordinate of the object on the pBoard */
+    int nPosY; /* Y-coordinate of the object on the pBoard */
 } GameObject;
 
 /* Rotates the object 90 degrees clockwise.
- * Precondition: obj must not be NULL.
- * @param obj Pointer to the GameObject to rotate.
+ * Precondition: pObj must not be NULL.
+ * @param pObj Pointer to the GameObject to rotate.
  * @return None.
  */
-void rotate(GameObject *obj);
+void rotate(GameObject *pObj);
 
 /* Sets the position of a GameObject.
- * Precondition: obj must not be NULL.
- * @param obj Pointer to the GameObject.
- * @param x New X-coordinate.
- * @param y New Y-coordinate.
+ * Precondition: pObj must not be NULL.
+ * @param pObj Pointer to the GameObject.
+ * @param nPosX New X-coordinate.
+ * @param nPosY New Y-coordinate.
  * @return None.
  */
-void set_pos(GameObject *obj, int x, int y);
+void setPosition(GameObject *pObj, int nPosX, int nPosY);
 
-/* Calculates the coordinates directly in front of the object based on its direction.
- * Precondition: object must not be NULL.
- * @param object Pointer to the GameObject.
- * @param out_x Pointer to an integer to store the resulting X-coordinate.
- * @param out_y Pointer to an integer to store the resulting Y-coordinate.
- * @return 1 if the object's direction is not undefined; 0 otherwise.
+/* Calculates the coordinates directly in front of the pObj based on its direction.
+ * Precondition: pObj must not be NULL.
+ * @param pObj Pointer to the GameObject.
+ * @param pOutX Pointer to an integer to store the resulting X-coordinate.
+ * @param pOutY Pointer to an integer to store the resulting Y-coordinate.
+ * @return 1 if the pObj's direction is not undefined; 0 otherwise.
  */
-int get_forward_coordinate(GameObject *object, int *out_x, int *out_y);
+int getForwardCoordinate(GameObject *pObj, int *pOutX, int *pOutY);
 
 /* Creates a new empty GameObject instance.
  * Precondition: none.
- * @param x X-coordinate of the new object.
- * @param y Y-coordinate of the new object.
- * @param status Visibility status of the object (HIDDEN or VISIBLE).
+ * @param nPosX X-coordinate of the new object.
+ * @param nPosY Y-coordinate of the new object.
+ * @param nStatus Visibility nStatus of the object (HIDDEN or VISIBLE).
  * @return Pointer to a newly allocated empty GameObject.
  */
-GameObject *empty_game_object(int x, int y, Status status);
+GameObject *emptyGameObject(int nPosX, int nPosY, Status status);
 
 /* Converts an ObjectType enum value into its corresponding name string.
  * Precondition: none.
  * @param type The ObjectType value to convert.
  * @return Pointer to a string representing the type name.
  */
-char *get_type_name(ObjectType type);
+char *getTypeName(ObjectType type);
 
-#endif // GAME_OBJECT_H
+#endif /* GAME_OBJECT_H */

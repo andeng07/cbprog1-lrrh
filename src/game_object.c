@@ -1,36 +1,38 @@
 #include <stdlib.h>
 #include "game_object.h"
 
-void rotate(GameObject *obj) {
-    if (obj->direction == UNDEFINED) return;
+void rotate(GameObject *pObj) {
+    int delta = 0;
 
-    int delta = 1;
+    if (pObj->direction == UNDEFINED) return;
 
-    obj->direction = (obj->direction + delta) % 4;
+    delta = 1;
+
+    pObj->direction = (pObj->direction + delta) % 4;
 }
 
-void set_pos(GameObject *obj, int x, int y) {
-    obj->x = x;
-    obj->y = y;
+void setPosition(GameObject *pObj, int nPosX, int nPosY) {
+    pObj->nPosX = nPosX;
+    pObj->nPosY = nPosY;
 }
 
-GameObject *empty_game_object(int x, int y, Status status) {
+GameObject *emptyGameObject(int nPosX, int nPosY, Status status) {
     GameObject *obj = malloc(sizeof(GameObject));
     obj->type = EMPTY;
     obj->direction = UNDEFINED;
     obj->status = status;
 
-    set_pos(obj, x, y);
+    setPosition(obj, nPosX, nPosY);
 
     return obj;
 }
 
-int get_forward_coordinate(GameObject *object, int *out_x, int *out_y) {
-    if (object->direction == UNDEFINED) return 0;
-
+int getForwardCoordinate(GameObject *pObj, int *pOutX, int *pOutY) {
     int deltaX = 0, deltaY = 0;
 
-    switch (object->direction) {
+    if (pObj->direction == UNDEFINED) return 0;
+
+    switch (pObj->direction) {
         case UP:
             deltaY = -1;
             break;
@@ -48,14 +50,14 @@ int get_forward_coordinate(GameObject *object, int *out_x, int *out_y) {
             break;
     }
 
-    *out_x = object->x + deltaX;
-    *out_y = object->y + deltaY;
+    *pOutX = pObj->nPosX + deltaX;
+    *pOutY = pObj->nPosY + deltaY;
     
     return 1;
 }
 
 
-char* get_type_name(ObjectType type) {
+char* getTypeName(ObjectType type) {
     switch (type) {
         case LITTLE_RED_RIDING_HOOD: return "Little Red Riding Hood";
         case GRANNY:                 return "Granny";

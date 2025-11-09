@@ -15,10 +15,9 @@ Andrei John Sumilang, 12506346
  * Version: 1.0-SNAPSHOT
  */
 
-#include <stdio.h>
 #include "game.h"
 
-int main() {
+int main(void) {
     run();
 
     return 0;

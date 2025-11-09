@@ -2,18 +2,20 @@
 #include "game_board.h"
 #include "game_object.h"
 
-GameBoard *create_game_board(int size) {
+GameBoard *createGameBoard(int nSize) {
+    int i, j;
+
     GameBoard *board = malloc(sizeof(GameBoard));
 
-    board->size = size;
+    board->nSize = nSize;
 
-    board->cells = malloc(size * sizeof(GameObject *));
+    board->cells = malloc(nSize * sizeof(GameObject *));
 
-    for (int i = 0; i < size; i++) {
-        GameObject *row = malloc(size * sizeof(GameObject));
+    for (i = 0; i < nSize; i++) {
+        GameObject *row = malloc(nSize * sizeof(GameObject));
 
-        for (int j = 0; j < size; j++) {
-            GameObject empty = *empty_game_object(j, i, HIDDEN);
+        for (j = 0; j < nSize; j++) {
+            GameObject empty = *emptyGameObject(j, i, HIDDEN);
             row[j] = empty;
         }
 
@@ -23,40 +25,40 @@ GameBoard *create_game_board(int size) {
     return board;
 }
 
-void destroy_game_board(GameBoard* board) {
-    free(board->cells);
-    free(board);
+void destroyGameBoard(GameBoard* pBoard) {
+    free(pBoard->cells);
+    free(pBoard);
 }
 
-void place_object(GameBoard *board, GameObject *obj, int x, int y) {
-    board->cells[y][x] = *obj;
+void placeObject(GameBoard *pBoard, GameObject *pObj, int nPosX, int nPosY) {
+    pBoard->cells[nPosY][nPosX] = *pObj;
 
-    set_pos(obj, x, y);
+    setPosition(pObj, nPosX, nPosY);
 }
 
-void move_object(GameBoard *board, GameObject *object, int toX, int toY) {
-    int fromX = object->x;
-    int fromY = object->y;
+void moveObject(GameBoard *pBoard, GameObject *pObj, int nDestX, int nDestY) {
+    int fromX = pObj->nPosX;
+    int fromY = pObj->nPosY;
 
-    board->cells[fromY][fromX] = *empty_game_object(fromX, fromY, VISIBLE);
+    pBoard->cells[fromY][fromX] = *emptyGameObject(fromX, fromY, VISIBLE);
 
-    set_pos(object, toX, toY);
+    setPosition(pObj, nDestX, nDestY);
 
-    board->cells[toY][toX] = *object;
+    pBoard->cells[nDestY][nDestX] = *pObj;
 }
 
-GameObject *get_object_at_pos(GameBoard *board, int x, int y) {
-    int is_valid = is_valid_pos(board, x, y);
+GameObject *getObjectAtPosition(GameBoard *pBoard, int nPosX, int nPosY) {
+    int is_valid = isValidPosition(pBoard, nPosX, nPosY);
 
     if (!is_valid) return NULL;
 
-    return &board->cells[y][x];
+    return &pBoard->cells[nPosY][nPosX];
 }
 
-int is_valid_pos(GameBoard *board, int x, int y) {
-    int size = board->size;
+int isValidPosition(GameBoard *pBoard, int nPosX, int nPosY) {
+    int size = pBoard->nSize;
 
-    if (x < 0 || x > size - 1 || y < 0 || y > size - 1) {
+    if (nPosX < 0 || nPosX > size - 1 || nPosY < 0 || nPosY > size - 1) {
         return 0;
     }
 

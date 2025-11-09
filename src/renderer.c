@@ -1,14 +1,14 @@
 #include "renderer.h"
-#include "io_util.h"
-#include <stdlib.h>
 #include <stdio.h>
 
-void print_board(GameBoard *board) {
-    int size = board->size;
+void printBoard(GameBoard *pBoard) {
+    int i, j;
 
-    for (int i = 0; i < size; i++) {
-        for (int j = 0; j < size; j++) {
-            GameObject obj = board->cells[i][j];
+    int size = pBoard->nSize;
+
+    for (i = 0; i < size; i++) {
+        for (j = 0; j < size; j++) {
+            GameObject obj = pBoard->cells[i][j];
             char landmark = ' ';
 
             if (obj.status == HIDDEN) {
@@ -40,7 +40,9 @@ void print_board(GameBoard *board) {
 
 }
 
-void print_title() {
+void printTitle(void) {
+    int i;
+
     char *frame[] = {
         "__| |______________________________________________________________________________________________________| |__",
         "__   ______________________________________________________________________________________________________   __",
@@ -62,7 +64,7 @@ void print_title() {
 
     int lineCount = sizeof(frame) / sizeof(frame[0]);
 
-    for (int i = 0; i < lineCount; i++) {
+    for (i = 0; i < lineCount; i++) {
         printf("%s\n", frame[i]);
     }
 }

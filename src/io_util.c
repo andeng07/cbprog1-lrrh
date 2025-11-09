@@ -3,17 +3,17 @@
 #include <string.h>
 #include <conio.h>
 
-int input_in_range(char *prompt, int lower_bound, int upper_bound) {
+int inputInRange(char *pPrompt, int nLowerBound, int nUpperBound) {
     int value;
     int is_valid = 0;
 
     do {
-        printf("%s (%d-%d): ", prompt, lower_bound, upper_bound);
+        printf("%s (%d-%d): ", pPrompt, nLowerBound, nUpperBound);
 
         if (scanf("%d", &value) != 1) {
             printf("Invalid input. Please enter a number.\n");
-        } else if (value < lower_bound || value > upper_bound) {
-            printf("Value must be between %d and %d.\n", lower_bound, upper_bound);
+        } else if (value < nLowerBound || value > nUpperBound) {
+            printf("Value must be between %d and %d.\n", nLowerBound, nUpperBound);
         } else {
             is_valid = 1;
         }
@@ -24,20 +24,21 @@ int input_in_range(char *prompt, int lower_bound, int upper_bound) {
     return value;
 }
 
-char input_in_set(char *prompt, char *valid_set) {
-    int size = strlen(valid_set);
+char inputInSet(char *pPrompt, char *pValidSet) {
+    int i;
+    int size = strlen(pValidSet);
 
     char value;
     int is_valid = 0;
 
     do {
-        printf("%s: ", prompt);
+        printf("%s: ", pPrompt);
 
         if (scanf(" %c", &value) != 1) {
             printf("Invalid input. Please enter a character.\n");
         } else {
-            for (int i = 0; i < size; i++) {
-                if (valid_set[i] == value) is_valid = 1;
+            for (i = 0; i < size; i++) {
+                if (pValidSet[i] == value) is_valid = 1;
             }
 
             if (!is_valid) printf("Invalid option. Please try again.");
@@ -49,8 +50,10 @@ char input_in_set(char *prompt, char *valid_set) {
     return value;
 }
 
-char read_key_in_set(char *valid_set) {
-    int size = strlen(valid_set);
+char readKeyInSet(char *pValidSet) {
+    int i;
+
+    int size = strlen(pValidSet);
 
     char value;
     int is_valid = 0;
@@ -58,20 +61,20 @@ char read_key_in_set(char *valid_set) {
     do {
         value = getch();
 
-        // perform a linear search
-        for (int i = 0; i < size; i++) {
-            if (value == valid_set[i]) is_valid = 1;
+        /* perform a linear search */
+        for (i = 0; i < size; i++) {
+            if (value == pValidSet[i]) is_valid = 1;
         }
     } while (!is_valid);
 
     return value; 
 }
 
-void print_center(char *to_print, int width) {
-    int len = strlen(to_print);
+void printCenter(char *pToPrint, int nWidth) {
+    int len = strlen(pToPrint);
 
-    int paddingLeft = (width - len) / 2;
-    int paddingRight = width - (len + paddingLeft);
+    int paddingLeft = (nWidth - len) / 2;
+    int paddingRight = nWidth - (len + paddingLeft);
 
-    printf("%*s%s%*s\n", paddingLeft, "", to_print, paddingRight, "");
+    printf("%*s%s%*s\n", paddingLeft, "", pToPrint, paddingRight, "");
 }
