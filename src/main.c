@@ -11,8 +11,25 @@ Andrei John Sumilang, 12506346
 /*
  * Description: <Describe what this program does briefly>
  * Programmed by: Andrei John Sumilang XC23
- * Last modified: <date when last revision was made>
+ * Last modified: 09 November 2025
  * Version: 1.0-SNAPSHOT
+ * Acknowledgements:
+ * - Memory allocation: https://www.youtube.com/watch?v=n_Se6bt8jM0
+ * - File/Project structure: https://www.lucavall.in/blog/how-to-structure-c-projects-my-experience-best-practices
+ * - Software design principles (Coupling and Cohesion): https://www.youtube.com/watch?v=YDNR_gfBk0Q
+ */
+
+/*
+ * Note:
+ * Most of the concepts that I've used (like arrays, enums, structs)
+ * were concepts that I learned a long time ago, making me unable to
+ * reference them.
+ *
+ * GitHub: https://github.com/andeng07 (pa-follow na rin... EME!)
+ * GitHub Repository: https://github.com/andeng07/cbprog1-lrrh
+ *
+ * To infinity and beyond,
+ * Andrei Sumilang
  */
 
 #include "game.h"
