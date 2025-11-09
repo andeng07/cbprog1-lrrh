@@ -8,8 +8,8 @@
  * dynamically allocated 2D array.
  */
 typedef struct GameBoard {
-    int nSize;            /* The width and height of the square pBoard (8–15). */
-    GameObject **cells;   /* 2D array of GameObject pointers representing the pBoard cells. */
+    int nSize;            /* The width and height of the square board (8–15). */
+    GameObject **cells;   /* 2D array of GameObject pointers representing the board cells. */
 } GameBoard;
 
 /* Creates and initializes a new GameBoard instance.
@@ -38,8 +38,8 @@ void destroyGameBoard(GameBoard *pBoard);
  */
 void placeObject(GameBoard *pBoard, GameObject *pObj, int nPosX, int nPosY);
 
-/* Moves a GameObject to a new position on the pBoard.
- * Removes the pObj from its current position and places it at the target coordinates.
+/* Moves a GameObject to a new position on the board.
+ * Removes the object from its current position and places it at the target coordinates.
  * Any existing pObj at the destination will be replaced.
  * Precondition: pBoard and pObj must not be NULL; nDestX and nDestY must be within bounds.
  * @param pBoard Pointer to the GameBoard.
@@ -50,7 +50,7 @@ void placeObject(GameBoard *pBoard, GameObject *pObj, int nPosX, int nPosY);
  */
 void moveObject(GameBoard *pBoard, GameObject *pObj, int nDestX, int nDestY);
 
-/* Retrieves the GameObject located at a specific pBoard position.
+/* Retrieves the GameObject located at a specific board position.
  * Precondition: nPosX and nPosY must be within bounds.
  * @param pBoard Pointer to the GameBoard.
  * @param nPosX The X-coordinate of the cell.

@@ -9,19 +9,19 @@ typedef struct GameSettings {
     int nDevMode;  /* When non-zero, enables developer or debug mode features. */
 } GameSettings;
 
-/* Tracks how many times the pPlayer has performed each action. */
+/* Tracks how many times the player has performed each action. */
 typedef struct PlayerActions {
-    int nForward;  /* Number of times the pPlayer moved forward. */
-    int nRotate;   /* Number of times the pPlayer rotated. */
-    int nSense;    /* Number of times the pPlayer used a sensing action. */
+    int nForward;  /* Number of times the player moved forward. */
+    int nRotate;   /* Number of times the player rotated. */
+    int nSense;    /* Number of times the player used a sensing action. */
 } PlayerActions;
 
-/* Represents the main game state, including the pBoard, pPlayer, and session nStatus. */
+/* Represents the main game state */
 typedef struct Game {
     GameBoard *pBoard;        /* Pointer to the active game pBoard. */
-    GameObject *pPlayer;      /* Pointer to the pPlayer-controlled object. */
+    GameObject *pPlayer;      /* Pointer to the player-controlled object. */
     int nIsAlive;            /* Player state flag (1 = alive, 0 = dead). */
-    PlayerActions *pActions;  /* Pointer to the pPlayer's action counters. */
+    PlayerActions *pActions;  /* Pointer to the player's action counters. */
     int nStatus;              /* Game nStatus flags (implementation-defined). */
 } Game;
 
