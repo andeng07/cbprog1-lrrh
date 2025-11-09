@@ -2,7 +2,7 @@
 #include "game_board.h"
 #include "game_object.h"
 
-GameBoard *createGameBoard(int nSize) {
+GameBoard *createGameBoard(int nSize, int nDevMode) {
     int i, j;
 
     GameBoard *board = malloc(sizeof(GameBoard));
@@ -15,7 +15,7 @@ GameBoard *createGameBoard(int nSize) {
         GameObject *row = malloc(nSize * sizeof(GameObject));
 
         for (j = 0; j < nSize; j++) {
-            GameObject empty = *emptyGameObject(j, i, HIDDEN);
+            GameObject empty = *emptyGameObject(j, i, nDevMode);
             row[j] = empty;
         }
 

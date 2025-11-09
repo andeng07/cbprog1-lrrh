@@ -12,14 +12,16 @@ int processMove(Game *pGame, char cMove);
 void gameLoop(GameBoard *pBoard, GameObject *pPlayer);
 
 void run(void) {
-    char cChoice;
+    char cChoice, cDevModeChoice;
 
     int nBoardSize, nPitCount, nFlowerCount;
 
     char aScreenTitleChoices[4] = {'P', 'p', 'Q', 'q'};
+    char aDevModeOptions[4] = { 'Y', 'y', 'N', 'n' };
+
+    GameSettings gameSettings;
 
     GameBoard *pBoard;
-
     GameObject player = {LITTLE_RED_RIDING_HOOD, DOWN, VISIBLE, 0, 0};
 
     /* screen title */
@@ -32,28 +34,37 @@ void run(void) {
         return;
     }
 
+    /* ask player if they want to proceed in developer mode */
+    cDevModeChoice = inputInSet("Continue with Developer Mode? [Y/N]", aDevModeOptions);
+
+    if (cDevModeChoice == 'Y' || cDevModeChoice == 'y') {
+        gameSettings.nDevMode = 1;
+    } else {
+        gameSettings.nDevMode = 0;
+    }
+
     /* initialize pBoard */
     nBoardSize = inputInRange("Enter pBoard nSize", 8, 15);
-    pBoard = createGameBoard(nBoardSize);
+    pBoard = createGameBoard(nBoardSize, gameSettings.nDevMode);
 
     /* place player-controlled character */
     placeObject(pBoard, &player, 0, 0);
 
     /* map configuration */
     nPitCount = inputInRange("Enter number of Pits in the map", 1, pBoard->nSize);
-    inputMultipleObjects(pBoard, PIT, nPitCount, HIDDEN);
+    inputMultipleObjects(pBoard, PIT, nPitCount, gameSettings.nDevMode);
 
     nFlowerCount = inputInRange("Enter number of Flowers in the map", 1, pBoard->nSize);
-    inputMultipleObjects(pBoard, FLOWER, nFlowerCount, HIDDEN);
+    inputMultipleObjects(pBoard, FLOWER, nFlowerCount, gameSettings.nDevMode);
 
     printf("Enter Wolf location:\n");
-    inputObject(pBoard, WOLF, HIDDEN);
+    inputObject(pBoard, WOLF, gameSettings.nDevMode);
 
     printf("Enter Woodsman location:\n");
-    inputObject(pBoard, WOODSMAN, HIDDEN);
+    inputObject(pBoard, WOODSMAN, gameSettings.nDevMode);
 
     printf("Enter Granny location:\n");
-    inputObject(pBoard, GRANNY, HIDDEN);
+    inputObject(pBoard, GRANNY, gameSettings.nDevMode);
 
     printf("\n");
 

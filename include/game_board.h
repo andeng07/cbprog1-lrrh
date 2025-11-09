@@ -15,9 +15,10 @@ typedef struct GameBoard {
 /* Creates and initializes a new GameBoard instance.
  * Precondition: nSize must be between 8 and 15 (inclusive).
  * @param nSize The width and height of the game pBoard.
+ * @param nDevMode The flag indicating whether developer mode is enabled
  * @return Pointer to a newly allocated GameBoard instance, or NULL if allocation fails.
  */
-GameBoard *createGameBoard(int nSize);
+GameBoard *createGameBoard(int nSize, int nDevMode);
 
 /* Frees all memory associated with a GameBoard instance.
  * Precondition: pBoard must not be NULL.
