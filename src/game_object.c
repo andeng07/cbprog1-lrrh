@@ -57,17 +57,62 @@ int getForwardCoordinate(GameObject *pObj, int *pOutX, int *pOutY) {
     return 1;
 }
 
+ObjectTypeMetadata *getTypeMetadata(ObjectType type) {
+    ObjectTypeMetadata *metadata = malloc(sizeof(ObjectTypeMetadata));
 
-char* getTypeName(ObjectType type) {
     switch (type) {
-        case LITTLE_RED_RIDING_HOOD: return "Little Red Riding Hood";
-        case GRANNY:                 return "Granny";
-        case PIT:                    return "Pit";
-        case WOODSMAN:               return "Woodsman";
-        case BAKESHOP:               return "Bakeshop";
-        case FLOWER:                 return "Flower";
-        case WOLF:                   return "Wolf";
-        case EMPTY:                  return "Empty";
-        default:                     return "Unknown";
-    }
+        case LITTLE_RED_RIDING_HOOD: {
+            metadata->type = LITTLE_RED_RIDING_HOOD;
+            metadata->pName = "Little Red Riding Hood";
+            metadata->pSenseName = "N/A";
+            metadata->cLandmark = 'L';
+            break;
+        }
+        case GRANNY: {
+            metadata->type = GRANNY;
+            metadata->pName = "Granny";
+            metadata->pSenseName = "Light";
+            metadata->cLandmark = 'G';
+            break;
+        }
+        case PIT: {
+            metadata->type = PIT;
+            metadata->pName = "Pit";
+            metadata->pSenseName = "Breeze";
+            metadata->cLandmark = 'P';
+            break;
+        }
+        case WOLF: {
+            metadata->type = WOLF;
+            metadata->pName = "Wolf";
+            metadata->pSenseName = "Howl";
+            metadata->cLandmark = 'W';
+            break;
+        }
+        case WOODSMAN: {
+            metadata->type = WOODSMAN;
+            metadata->pName = "Woodsman";
+            metadata->pSenseName = "Sound";
+            metadata->cLandmark = 'W';
+            break;
+        }
+        case BAKESHOP: {
+            metadata->type = BAKESHOP;
+            metadata->pName = "Bakeshop";
+            metadata->pSenseName = "Heat";
+            metadata->cLandmark = 'B';
+            break;
+        }
+        case FLOWER: {
+            metadata->type = FLOWER;
+            metadata->pName = "Flower";
+            metadata->pSenseName = "Scent";
+            metadata->cLandmark = 'F';
+            break;
+        }
+        case EMPTY:
+            return NULL;
+    };
+
+    return metadata;
 }

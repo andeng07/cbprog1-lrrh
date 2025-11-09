@@ -22,6 +22,13 @@ typedef enum ObjectType {
     EMPTY
 } ObjectType;
 
+typedef struct ObjectTypeMetadata {
+    ObjectType type;
+    char *pName;
+    char *pSenseName;
+    char cLandmark;
+} ObjectTypeMetadata;
+
 /* Indicates the visibility nStatus of an object. */
 typedef enum Status {
     HIDDEN,
@@ -76,11 +83,11 @@ int getForwardCoordinate(GameObject *pObj, int *pOutX, int *pOutY);
  */
 GameObject *emptyGameObject(int nPosX, int nPosY, Status status);
 
-/* Converts an ObjectType enum value into its corresponding name string.
+/* Converts an ObjectType enum value into its corresponding metadata.
  * Precondition: none.
  * @param type The ObjectType value to convert.
- * @return Pointer to a string representing the type name.
+ * @return Pointer to the metadata representing the type name.
  */
-char *getTypeName(ObjectType type);
+ObjectTypeMetadata *getTypeMetadata(ObjectType type);
 
 #endif /* GAME_OBJECT_H */

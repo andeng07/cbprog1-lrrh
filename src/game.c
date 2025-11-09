@@ -106,7 +106,7 @@ void inputMultipleObjects(GameBoard *pBoard, ObjectType type, int nCount, Status
     int i;
 
     for (i = 0; i < nCount; i++) {
-        printf("Enter %s #%d location:\n", getTypeName(type), i + 1);
+        printf("Enter %s #%d location:\n", getTypeMetadata(type)->pName, i + 1);
         inputObject(pBoard, type, status);
     }
 }
@@ -128,7 +128,12 @@ int processMove(Game *pGame, char cMove) {
                     actions->nForward++;
                 } else if (cMove == 's' && target != NULL) {
                     if (target->status == HIDDEN) {
+                        ObjectTypeMetadata *metadata = getTypeMetadata(target->type);
+
+                        if (metadata != NULL) printf("You sensed: %s\n", metadata->pSenseName);
+
                         target->status = VISIBLE;
+
                         actions->nSense++;
                     }
                 }
@@ -175,7 +180,6 @@ void gameLoop(GameBoard *pBoard, GameObject *pPlayer) {
         printf("Rotation: %d\n", game.pActions->nRotate);
         printf("Sense: %d\n", game.pActions->nSense);
 
-
         isValid = 0;
 
         while (!isValid) {
@@ -184,7 +188,8 @@ void gameLoop(GameBoard *pBoard, GameObject *pPlayer) {
                 if (validMoves[i] == move) isValid = 1;
         }
 
-        processMove(&game, move);
         system("cls");
+
+        processMove(&game, move);
     }
 }
