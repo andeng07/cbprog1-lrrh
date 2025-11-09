@@ -26,8 +26,8 @@ void printBoard(GameBoard *pBoard) {
                         break;
                     case GRANNY: landmark = 'G'; break;
                     case PIT: landmark = 'P'; break;
-                    case WOLF: landmark = 'R'; break;
-                    case WOODSMAN: landmark = 'W'; break;
+                    case WOLF: landmark = 'W'; break;
+                    case WOODSMAN: landmark = 'M'; break;
                     case BAKESHOP: landmark = 'B'; break;
                     case FLOWER: landmark = 'F'; break;
                     case EMPTY: landmark = ' '; break;
