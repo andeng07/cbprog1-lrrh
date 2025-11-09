@@ -8,7 +8,7 @@ int input_in_range(char *prompt, int lower_bound, int upper_bound) {
     int is_valid = 0;
 
     do {
-        printf("%s: ", prompt);
+        printf("%s (%d-%d): ", prompt, lower_bound, upper_bound);
 
         if (scanf("%d", &value) != 1) {
             printf("Invalid input. Please enter a number.\n");
