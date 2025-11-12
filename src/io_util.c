@@ -26,8 +26,8 @@ int inputInRange(char *pPrompt, int nLowerBound, int nUpperBound) {
 
 char inputInSet(char *pPrompt, char *pValidSet) {
     int i;
-    int size = strlen(pValidSet);
-
+    int size = sizeof(pValidSet) / sizeof(pValidSet[0]);
+    
     char value;
     int is_valid = 0;
 
@@ -38,6 +38,7 @@ char inputInSet(char *pPrompt, char *pValidSet) {
             printf("Invalid input. Please enter a character.\n");
         } else {
             for (i = 0; i < size; i++) {
+                printf("%c -> %c -> %d\n", pValidSet[i], value, pValidSet[i] == value);
                 if (pValidSet[i] == value) is_valid = 1;
             }
 
@@ -53,7 +54,7 @@ char inputInSet(char *pPrompt, char *pValidSet) {
 char readKeyInSet(char *pValidSet) {
     int i;
 
-    int size = strlen(pValidSet);
+    int size = sizeof(pValidSet) / sizeof(pValidSet[0]);
 
     char value;
     int is_valid = 0;
