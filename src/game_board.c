@@ -4,14 +4,25 @@
 
 GameBoard *createGameBoard(int nSize, int nDevMode) {
     int i, j;
-
+    
+    /*
+        allocate memory according to the GameBoard's struct size.
+        this was made to avoid re-duplication of GameBoard 
+        in memory. 
+    */ 
     GameBoard *board = malloc(sizeof(GameBoard));
 
     board->nSize = nSize;
 
+    /* 
+        allocate an array of arrays
+     */
     board->cells = malloc(nSize * sizeof(GameObject *));
 
     for (i = 0; i < nSize; i++) {
+        /*
+            allocate an array that represents a row
+        */
         GameObject *row = malloc(nSize * sizeof(GameObject));
 
         for (j = 0; j < nSize; j++) {
