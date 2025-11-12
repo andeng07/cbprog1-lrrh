@@ -110,8 +110,14 @@ ObjectTypeMetadata *getTypeMetadata(ObjectType type) {
             metadata->cLandmark = 'F';
             break;
         }
-        case EMPTY:
-            return NULL;
+        case EMPTY: {
+            metadata->type = EMPTY;
+            metadata->pName = "Empty";
+            metadata->pSenseName = "None";
+            metadata->cLandmark = ' ';
+        }
+
+        default: return NULL;
     };
 
     return metadata;
