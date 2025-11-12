@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include "game_object.h"
-#include <stdio.h>
 
 void rotate(GameObject *pObj, RotationDirection direction) {
     int delta = 0;
