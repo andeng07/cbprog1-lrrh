@@ -14,23 +14,16 @@ void printBoard(GameBoard *pBoard) {
             if (obj.status == HIDDEN) {
                 landmark = '*';
             } else {
-                switch (obj.type) {
-                    case LITTLE_RED_RIDING_HOOD:
-                        switch (obj.direction) {
-                            case UP: landmark = '^'; break;
-                            case DOWN: landmark = 'v'; break;
-                            case LEFT: landmark = '<'; break;
-                            case RIGHT: landmark = '>'; break;
-                            default: landmark = '?'; break;
-                        }
-                        break;
-                    case GRANNY: landmark = 'G'; break;
-                    case PIT: landmark = 'P'; break;
-                    case WOLF: landmark = 'W'; break;
-                    case WOODSMAN: landmark = 'M'; break;
-                    case BAKESHOP: landmark = 'B'; break;
-                    case FLOWER: landmark = 'F'; break;
-                    case EMPTY: landmark = ' '; break;
+                landmark = getTypeMetadata(obj.type)->cLandmark;
+
+                if (obj.type == LITTLE_RED_RIDING_HOOD) {
+                    switch (obj.direction) {
+                        case UP: landmark = '^'; break;
+                        case DOWN: landmark = 'v'; break;
+                        case LEFT: landmark = '<'; break;
+                        case RIGHT: landmark = '>'; break;
+                        default: landmark = '?'; break;
+                    }
                 }
             }
             printf("%c ", landmark);
