@@ -6,7 +6,7 @@ void rotate(GameObject *pObj, RotationDirection direction) {
 
     if (pObj->direction == UNDEFINED) return;
 
-    delta = (direction == ROTATE_RIGHT) ? -1 : 1;
+    delta = (direction == ROTATE_RIGHT) ? 1 : -1;
 
     /* add 4 to avoid processing negative values */
     pObj->direction = (pObj->direction + delta + 4) % 4;

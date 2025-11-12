@@ -140,8 +140,8 @@ int processMove(Game *pGame, char cMove) {
             }
             break;
         }
-        case 'a': case 'd': {
-            RotationDirection direction = cMove == 'a' ? ROTATE_RIGHT : ROTATE_LEFT;
+        case 'a': case 'd': { /* Rotate */
+            RotationDirection direction = cMove == 'a' ? ROTATE_LEFT : ROTATE_RIGHT;
 
             rotate(player, direction);
             placeObject(board, player, player->nPosX, player->nPosY);
