@@ -24,10 +24,8 @@ int inputInRange(char *pPrompt, int nLowerBound, int nUpperBound) {
     return value;
 }
 
-char inputInSet(char *pPrompt, char *pValidSet) {
+char inputInSet(char *pPrompt, char *pValidSet, int nSetSize) {
     int i;
-    int size = sizeof(pValidSet) / sizeof(pValidSet[0]);
-    
     char value;
     int is_valid = 0;
 
@@ -37,7 +35,7 @@ char inputInSet(char *pPrompt, char *pValidSet) {
         if (scanf(" %c", &value) != 1) {
             printf("Invalid input. Please enter a character.\n");
         } else {
-            for (i = 0; i < size; i++) {
+            for (i = 0; i < nSetSize; i++) {
                 if (pValidSet[i] == value) is_valid = 1;
             }
 
@@ -50,10 +48,8 @@ char inputInSet(char *pPrompt, char *pValidSet) {
     return value;
 }
 
-char readKeyInSet(char *pValidSet) {
+char readKeyInSet(char *pValidSet, int nSetSize) {
     int i;
-
-    int size = sizeof(pValidSet) / sizeof(pValidSet[0]);
 
     char value;
     int is_valid = 0;
@@ -62,7 +58,7 @@ char readKeyInSet(char *pValidSet) {
         value = getch();
 
         /* perform a linear search */
-        for (i = 0; i < size; i++) {
+        for (i = 0; i < nSetSize; i++) {
             if (value == pValidSet[i]) is_valid = 1;
         }
     } while (!is_valid);

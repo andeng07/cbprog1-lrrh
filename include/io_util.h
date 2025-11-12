@@ -13,17 +13,19 @@ int inputInRange(char *pPrompt, int nLowerBound, int nUpperBound);
 /* Prompts the user to enter a single character from a set of valid options.
  * Precondition: pPrompt and pValidSet are not NULL.
  * @param pPrompt The message displayed before reading input.
- * @param pValidSet A null-terminated string of allowed characters.
+ * @param pValidSet An array of allowed characters.
+ * @param nSetSize The amount of allowed characters.
  * @return The validated character entered by the user.
  */
-char inputInSet(char *pPrompt, char *pValidSet);
+char inputInSet(char *pPrompt, char *pValidSet, int nSetSize);
 
 /* Reads a single character from input without prompting.
  * Precondition: pValidSet is not NULL.
- * @param pValidSet A null-terminated string of allowed characters.
+ * @param pValidSet An array of allowed characters.
+ * @param nSetSize The amount of allowed characters.
  * @return The validated character entered by the user.
  */
-char readKeyInSet(char *pValidSet);
+char readKeyInSet(char *pValidSet, int nSetSize);
 
 /* Prints text centered within a given nWidth.
  * Precondition: pToPrint is not NULL.

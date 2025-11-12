@@ -27,7 +27,7 @@ void run(void) {
     /* screen title */
     printTitle();
 
-    cChoice = inputInSet("Press [P] to Play or [Q] to Quit", aScreenTitleChoices);
+    cChoice = inputInSet("Press [P] to Play or [Q] to Quit", aScreenTitleChoices, 4);
 
     if (cChoice == 'Q' || cChoice == 'q') {
         printf("Goodbye!\n");
@@ -35,7 +35,7 @@ void run(void) {
     }
 
     /* ask player if they want to proceed in developer mode */
-    cDevModeChoice = inputInSet("Continue with Developer Mode? [Y/N]", aDevModeOptions);
+    cDevModeChoice = inputInSet("Continue with Developer Mode? [Y/N]", aDevModeOptions, 4);
 
     if (cDevModeChoice == 'Y' || cDevModeChoice == 'y') {
         gameSettings.nDevMode = 1;
@@ -157,7 +157,7 @@ int processMove(Game *pGame, char cMove) {
 void gameLoop(GameBoard *pBoard, GameObject *pPlayer) {
     char move;
 
-    char validMoves[] = { 'w','a','s','d','q' };
+    char validMoves[5] = { 'w','a','s','d','q' };
 
     Game game;
     PlayerActions actions = {0, 0, 0};
@@ -179,7 +179,7 @@ void gameLoop(GameBoard *pBoard, GameObject *pPlayer) {
         printf("Rotation: %d\n", game.pActions->nRotate);
         printf("Sense: %d\n", game.pActions->nSense);
 
-        move = readKeyInSet(validMoves);
+        move = readKeyInSet(validMoves, 5);
 
         system("cls");
 
