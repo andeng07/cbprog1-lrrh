@@ -38,7 +38,6 @@ char inputInSet(char *pPrompt, char *pValidSet) {
             printf("Invalid input. Please enter a character.\n");
         } else {
             for (i = 0; i < size; i++) {
-                printf("%c -> %c -> %d\n", pValidSet[i], value, pValidSet[i] == value);
                 if (pValidSet[i] == value) is_valid = 1;
             }
 
