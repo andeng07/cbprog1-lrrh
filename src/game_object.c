@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "game_object.h"
+#include <stdio.h>
 
 void rotate(GameObject *pObj, RotationDirection direction) {
     int delta = 0;
@@ -115,6 +116,7 @@ ObjectTypeMetadata *getTypeMetadata(ObjectType type) {
             metadata->pName = "Empty";
             metadata->pSenseName = "None";
             metadata->cLandmark = ' ';
+            break;
         }
 
         default: return NULL;
