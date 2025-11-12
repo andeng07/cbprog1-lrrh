@@ -117,16 +117,16 @@ int processMove(Game *pGame, char cMove) {
     PlayerActions *actions = pGame->pActions;
 
     switch (cMove) {
-        case 'w': case 's': {
+        case 'w': case 's': { /* Forward or Sense */
             int forwardX, forwardY;
             getForwardCoordinate(player, &forwardX, &forwardY);
 
             if (isValidPosition(board, forwardX, forwardY)) {
                 GameObject *target = getObjectAtPosition(board, forwardX, forwardY);
-                if (cMove == 'w' && target->type == EMPTY) {
+                if (cMove == 'w' && target->type == EMPTY) { /* Forward */
                     moveObject(board, player, forwardX, forwardY);
                     actions->nForward++;
-                } else if (cMove == 's' && target != NULL) {
+                } else if (cMove == 's' && target != NULL) { /* Sense */
                     if (target->status == HIDDEN) {
                         ObjectTypeMetadata *metadata = getTypeMetadata(target->type);
 
