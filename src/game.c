@@ -9,6 +9,7 @@
 void inputObject(GameBoard *pBoard, ObjectType type, Status status);
 void inputMultipleObjects(GameBoard *pBoard, ObjectType type, int nCount, Status status);
 int processMove(Game *pGame, char cMove);
+void handleCollission(Game *pGame, GameObject *pPlayer, GameObject *pGameObject);
 void gameLoop(GameBoard *pBoard, GameObject *pPlayer);
 
 void run(void) {
@@ -124,7 +125,10 @@ int processMove(Game *pGame, char cMove) {
 
             if (isValidPosition(board, forwardX, forwardY)) {
                 GameObject *target = getObjectAtPosition(board, forwardX, forwardY);
-                if (cMove == 'w' && target->type == EMPTY) { /* Forward */
+                if (cMove == 'w') { /* Forward */
+                    if (target != NULL) {
+                        handleCollission(pGame, pGame->pPlayer, target);
+                    }
                     moveObject(board, player, forwardX, forwardY);
                     actions->nForward++;
                 } else if (cMove == 's' && target != NULL) { /* Sense */
@@ -153,6 +157,63 @@ int processMove(Game *pGame, char cMove) {
     }
 
     return 0;
+}
+
+/*
+    Precodition:   - pGame, pPlayer, and pGameObject are NOT NULL
+                   - pGameObject->type is NOT EMPTY
+*/
+void handleCollission(Game *pGame, GameObject *pPlayer, GameObject *pGameObject) {
+    GameState *pGameState = pGame->pGameState;
+
+    if (getTypeMetadata(pGameObject->type)->nIsCollissionPersistent) {
+
+    }
+    
+    switch (pGameObject->type) {
+        case GRANNY: {  
+            // TODO: is bread, flower, and woodsman present? YES: WIN, NO: LOSE
+            pGameState->nIsAlive = pGameState->nIsWoodsmanPresent && pGameState->nIsBreadPresent && pGameState->nIsFlowerPresent;
+
+            break;
+        }
+        case PIT: {
+            // TODO: die basically 
+            pGameState->nIsAlive = 0;
+
+            break;
+        }
+        case WOLF: {
+            // TODO: gets eaten ONLY IF LRRH doesn't have a bread
+            pGameState->nIsAlive = pGameState->nIsBreadPresent;
+
+            if (pGameState->nIsBreadPresent) {
+                pGameState->nIsBreadPresent = 0;
+            }
+
+            break;
+        }
+        case WOODSMAN: {
+            // TODO: set woodsman flag to true
+            pGameState->nIsWoodsmanPresent = 1;
+
+            break;
+        }
+        case BAKESHOP: {
+            // TODO: set bread flag to true
+            pGameState->nIsBreadPresent = 1;
+
+            break;
+        }
+        case FLOWER: {
+            // TODO: set flower flag to true
+            pGameState->nIsFlowerPresent = 1;
+
+            break;
+        }
+
+        default: return;
+    }
 }
 
 void gameLoop(GameBoard *pBoard, GameObject *pPlayer) {
