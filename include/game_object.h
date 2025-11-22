@@ -24,6 +24,7 @@ typedef enum ObjectType {
 
 typedef struct ObjectTypeMetadata {
     ObjectType type;
+    int nIsCollissionPersistent;
     char *pName;
     char *pSenseName;
     char cLandmark;

@@ -63,6 +63,7 @@ ObjectTypeMetadata *getTypeMetadata(ObjectType type) {
     switch (type) {
         case LITTLE_RED_RIDING_HOOD: {
             metadata->type = LITTLE_RED_RIDING_HOOD;
+            metadata->nIsCollissionPersistent = 1;
             metadata->pName = "Little Red Riding Hood";
             metadata->pSenseName = "N/A";
             metadata->cLandmark = 'L';
@@ -70,6 +71,7 @@ ObjectTypeMetadata *getTypeMetadata(ObjectType type) {
         }
         case GRANNY: {
             metadata->type = GRANNY;
+            metadata->nIsCollissionPersistent = 1;
             metadata->pName = "Granny";
             metadata->pSenseName = "Light";
             metadata->cLandmark = 'G';
@@ -77,6 +79,7 @@ ObjectTypeMetadata *getTypeMetadata(ObjectType type) {
         }
         case PIT: {
             metadata->type = PIT;
+            metadata->nIsCollissionPersistent = 1;
             metadata->pName = "Pit";
             metadata->pSenseName = "Breeze";
             metadata->cLandmark = 'P';
@@ -84,6 +87,7 @@ ObjectTypeMetadata *getTypeMetadata(ObjectType type) {
         }
         case WOLF: {
             metadata->type = WOLF;
+            metadata->nIsCollissionPersistent = 1;
             metadata->pName = "Wolf";
             metadata->pSenseName = "Howl";
             metadata->cLandmark = 'W';
@@ -91,6 +95,7 @@ ObjectTypeMetadata *getTypeMetadata(ObjectType type) {
         }
         case WOODSMAN: {
             metadata->type = WOODSMAN;
+            metadata->nIsCollissionPersistent = 0;
             metadata->pName = "Woodsman";
             metadata->pSenseName = "Sound";
             metadata->cLandmark = 'M';
@@ -98,6 +103,7 @@ ObjectTypeMetadata *getTypeMetadata(ObjectType type) {
         }
         case BAKESHOP: {
             metadata->type = BAKESHOP;
+            metadata->nIsCollissionPersistent = 1;
             metadata->pName = "Bakeshop";
             metadata->pSenseName = "Heat";
             metadata->cLandmark = 'B';
@@ -105,6 +111,7 @@ ObjectTypeMetadata *getTypeMetadata(ObjectType type) {
         }
         case FLOWER: {
             metadata->type = FLOWER;
+            metadata->nIsCollissionPersistent = 1;
             metadata->pName = "Flower";
             metadata->pSenseName = "Scent";
             metadata->cLandmark = 'F';
@@ -112,6 +119,7 @@ ObjectTypeMetadata *getTypeMetadata(ObjectType type) {
         }
         case EMPTY: {
             metadata->type = EMPTY;
+            metadata->nIsCollissionPersistent = 0;
             metadata->pName = "Empty";
             metadata->pSenseName = "None";
             metadata->cLandmark = ' ';

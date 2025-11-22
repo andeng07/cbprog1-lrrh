@@ -10,6 +10,7 @@
 typedef struct GameBoard {
     int nSize;            /* The width and height of the square board (8–15). */
     GameObject **cells;   /* 2D array of GameObject pointers representing the board cells. */
+    GameObject *pPersistedObject; 
 } GameBoard;
 
 /* Creates and initializes a new GameBoard instance.

@@ -51,10 +51,30 @@ void moveObject(GameBoard *pBoard, GameObject *pObj, int nDestX, int nDestY) {
     int fromX = pObj->nPosX;
     int fromY = pObj->nPosY;
 
-    pBoard->cells[fromY][fromX] = *emptyGameObject(fromX, fromY, VISIBLE);
+    GameObject destObj = pBoard->cells[nDestY][nDestX];
+
+    if (pBoard->pPersistedObject != NULL) {
+        GameObject *pPersisted = pBoard->pPersistedObject;
+
+        if (pPersisted->nPosX == fromX && pPersisted->nPosY == fromY) {
+            pBoard->cells[fromY][fromX] = *pPersisted;
+        } else {
+            pBoard->cells[fromY][fromX] = *emptyGameObject(fromX, fromY, VISIBLE);
+        }
+
+        free(pBoard->pPersistedObject);
+        pBoard->pPersistedObject = NULL;
+    } else {
+        pBoard->cells[fromY][fromX] = *emptyGameObject(fromX, fromY, VISIBLE);
+    }
+
+    if (getTypeMetadata(destObj.type)->nIsCollissionPersistent) {
+        GameObject *copy = malloc(sizeof(GameObject));
+        *copy = destObj;
+        pBoard->pPersistedObject = copy;
+    }
 
     setPosition(pObj, nDestX, nDestY);
-
     pBoard->cells[nDestY][nDestX] = *pObj;
 }
 
