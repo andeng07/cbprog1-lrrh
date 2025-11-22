@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
+#include <windows.h>
 #include "game.h"
 #include "game_board.h"
 #include "io_util.h"
@@ -73,6 +74,7 @@ void run(void) {
 
     printf("\n");
 
+    printDialogue ();
     /* start game */
     gameLoop(pBoard, &player);
 
@@ -122,19 +124,19 @@ int processMove(Game *pGame, char cMove) {
     PlayerActions *actions = pGame->pActions;
 
     switch (cMove) {
-        case 'w': case 's': { /* Forward or Sense */
+        case 'w':case 'W':case 'S': case 's': { /* Forward or Sense */
             int forwardX, forwardY;
             getForwardCoordinate(player, &forwardX, &forwardY);
 
             if (isValidPosition(board, forwardX, forwardY)) {
                 GameObject *target = getObjectAtPosition(board, forwardX, forwardY);
-                if (cMove == 'w') { /* Forward */
+                if (cMove == 'w' || cMove == 'W') { /* Forward */
                     if (target != NULL) {
                         handleCollission(pGame, pGame->pPlayer, target);
                     }
                     moveObject(board, player, forwardX, forwardY);
                     actions->nForward++;
-                } else if (cMove == 's' && target != NULL) { /* Sense */
+                } else if ((cMove == 's' || cMove == 'S') && target != NULL) { /* Sense */
                     if (target->status == HIDDEN) {
                         ObjectTypeMetadata *metadata = getTypeMetadata(target->type);
 
@@ -187,18 +189,32 @@ void handleCollission(Game *pGame, GameObject *pPlayer, GameObject *pGameObject)
             // WOODSMAN IS PRESENT, BREAD IS PRESENT, FLOWER IS PRESENT
             if (pGameState->nIsWoodsmanPresent && pGameState->nIsBreadPresent && pGameState->nIsFlowerPresent)
             {
-                // WIN MESSAGE
+                printf ("Congratulations! you completed the game\n");
+                Sleep (5000);
+                printf ("Thanks to you, The little red riding hood was able to enjoy a wonderful day with her grandma!\n");
+                Sleep (4000);
+                printf ("The End");
             } else 
             {
-                // LOSE MESSAGE
+                printf ("Bummer! you lost the game ~_~\n");
+                Sleep (3000);
+                printf ("It seems you weren't able to gather all of the needed objects \n");
+                Sleep (4000);
+                printf ("Grandma looks at you with disappointment..\n");
+                Sleep (2000);
+                printf ("The End");
             }
             
+            Sleep (2);
             break;
         }
         case PIT: {
             // TODO: die basically 
             pGameState->nIsAlive = 0;
-
+            printf ("You Died!\n");
+            Sleep (3000);
+            printf ("You scream as you fall into the pit to your demise\n");
+            Sleep (2000);
             break;
         }
         case WOLF: {
@@ -206,7 +222,13 @@ void handleCollission(Game *pGame, GameObject *pPlayer, GameObject *pGameObject)
             pGameState->nIsAlive = pGameState->nIsBreadPresent;
 
             if (pGameState->nIsBreadPresent) {
+
                 pGameState->nIsBreadPresent = 0;
+                printf ("The wolf caught little red riding hood!\n");
+                Sleep (2000);
+                printf ("LRRH: I really want to have a good time with grandma today...\n");
+                Sleep (4000);
+                printf("Game Over!\n");
             }
 
             break;

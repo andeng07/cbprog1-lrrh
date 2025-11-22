@@ -15,7 +15,7 @@ void printBoard(GameBoard *pBoard);
  * @param width The total width of the display area.
  */
 void printTitle(void);
-
+void printDialogue (void);
 void renderDashboard(PlayerActions *actions, GameState *state);
 
 #endif /* RENDERER_H */

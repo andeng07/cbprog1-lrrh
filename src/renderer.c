@@ -1,5 +1,6 @@
 #include "renderer.h"
 #include <stdio.h>
+#include <windows.h>
 
 void printBoard(GameBoard *pBoard) {
     int i, j;
@@ -75,4 +76,21 @@ void renderDashboard(PlayerActions *actions, GameState *state) {
     if (state->nIsBreadPresent) printf("You have bread!\n");
     if (state->nIsFlowerPresent) printf("You have flower!\n");
     if (state->nIsWoodsmanPresent) printf("You are with Woodsman!\n");
+}
+
+void printDialogue(void){
+    
+
+    printf ("Once upon a time, there was a sweet little girl named little red riding hood.\n");
+    Sleep (4000);
+    printf ("She wanted to visit grandma today, but first, her grandma is expecting bread and some flowers.\n");
+    Sleep (5000);
+    printf ("And she must be cautious around here, people say there is a wolf that lurks around the forest.\n");
+    Sleep (5000);
+    printf ("And not to mention the dangerous pits that seem to be bottomless\n");
+    Sleep (3000);
+    printf ("LRRH: I hope I get to grandma safely, it's scary around here");
+    Sleep (4000);
+    printf ("\n\n\n\n");
+    printf ("Little red riding hood enters the forest............\n");
 }
