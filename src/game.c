@@ -46,6 +46,7 @@ void run(void) {
     /* initialize pBoard */
     nBoardSize = inputInRange("Enter pBoard nSize", 8, 15);
     pBoard = createGameBoard(nBoardSize, gameSettings.nDevMode);
+    pBoard->pPersistedObject = emptyGameObject(0, 0, VISIBLE);
 
     /* place player-controlled character */
     placeObject(pBoard, &player, 0, 0);
@@ -160,18 +161,18 @@ void gameLoop(GameBoard *pBoard, GameObject *pPlayer) {
     char validMoves[5] = { 'w','a','s','d','q' };
 
     Game game;
+    GameState state = {1, 0, 0, 0};
     PlayerActions actions = {0, 0, 0};
 
     game.pBoard = pBoard;
     game.pPlayer = pPlayer;
 
-    game.nIsAlive = 1;
-
     game.nStatus = 0;
 
+    game.pGameState = &state;
     game.pActions = &actions;
 
-    while(game.nIsAlive) {
+    while(game.pGameState->nIsAlive) {
         printBoard(pBoard);
 
         printf("=====DASHBOARD=======\n");
@@ -186,7 +187,7 @@ void gameLoop(GameBoard *pBoard, GameObject *pPlayer) {
         processMove(&game, move);
 
         if (move == 'q') {
-            game.nIsAlive = 0;
+            game.pGameState->nIsAlive = 0;
         }
     }
 }

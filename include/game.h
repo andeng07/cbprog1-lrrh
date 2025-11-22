@@ -16,11 +16,19 @@ typedef struct PlayerActions {
     int nSense;    /* Number of times the player used a sensing action. */
 } PlayerActions;
 
-/* Represents the main game state */
+/* Holds flags that represents the state of the game. */
+typedef struct GameState {
+    int nIsAlive;           /* Flag indicating if the player is alive or not. */
+    int nIsWoodsmanPresent; /* Flag indicating if the player has located woodsman or not */
+    int nIsBreadPresent;    /* Flag indicating if the bread has been retrieved or not. */
+    int nIsFlowerPresent;   /* Flag indicating if the flower has been retrieved or not. */
+} GameState;
+
+/* Represents the main game state. */
 typedef struct Game {
     GameBoard *pBoard;        /* Pointer to the active game pBoard. */
     GameObject *pPlayer;      /* Pointer to the player-controlled object. */
-    int nIsAlive;            /* Player state flag (1 = alive, 0 = dead). */
+    GameState *pGameState;    /* Pointer to the game's current state */
     PlayerActions *pActions;  /* Pointer to the player's action counters. */
     int nStatus;              /* Game nStatus flags (implementation-defined). */
 } Game;
