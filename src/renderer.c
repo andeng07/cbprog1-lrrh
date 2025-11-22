@@ -61,3 +61,18 @@ void printTitle(void) {
         printf("%s\n", frame[i]);
     }
 }
+
+void renderDashboard(PlayerActions *actions, GameState *state) {
+    printf("=====DASHBOARD=======\n");
+    printf("Actions:\n");
+    printf("Forward: %d\n", actions->nForward);
+    printf("Rotation: %d\n", actions->nRotate);
+    printf("Sense: %d\n", actions->nSense);
+
+    printf("\n");
+
+    printf("Game state:\n");
+    if (state->nIsBreadPresent) printf("You have bread!\n");
+    if (state->nIsFlowerPresent) printf("You have flower!\n");
+    if (state->nIsWoodsmanPresent) printf("You are with Woodsman!\n");
+}

@@ -16,4 +16,6 @@ void printBoard(GameBoard *pBoard);
  */
 void printTitle(void);
 
+void renderDashboard(PlayerActions *actions, GameState *state);
+
 #endif /* RENDERER_H */

@@ -59,6 +59,9 @@ void run(void) {
     nFlowerCount = inputInRange("Enter number of Flowers in the map", 1, pBoard->nSize);
     inputMultipleObjects(pBoard, FLOWER, nFlowerCount, gameSettings.nDevMode);
 
+    printf("Enter Bakeshop location:\n");
+    inputObject(pBoard, BAKESHOP, gameSettings.nDevMode);
+
     printf("Enter Wolf location:\n");
     inputObject(pBoard, WOLF, gameSettings.nDevMode);
 
@@ -171,10 +174,25 @@ void handleCollission(Game *pGame, GameObject *pPlayer, GameObject *pGameObject)
     }
     
     switch (pGameObject->type) {
-        case GRANNY: {  
+        case GRANNY: {
             // TODO: is bread, flower, and woodsman present? YES: WIN, NO: LOSE
-            pGameState->nIsAlive = pGameState->nIsWoodsmanPresent && pGameState->nIsBreadPresent && pGameState->nIsFlowerPresent;
+            pGameState->nIsAlive = 0; // 1 or 0
 
+            // nIsWoodsmanPresent = 1
+            // nIsBreadPresent = 1
+            // nIsFlowerPresent = 1
+
+            // && LOGICAL OPERATOR 
+
+            // WOODSMAN IS PRESENT, BREAD IS PRESENT, FLOWER IS PRESENT
+            if (pGameState->nIsWoodsmanPresent && pGameState->nIsBreadPresent && pGameState->nIsFlowerPresent)
+            {
+                // WIN MESSAGE
+            } else 
+            {
+                // LOSE MESSAGE
+            }
+            
             break;
         }
         case PIT: {
@@ -236,10 +254,7 @@ void gameLoop(GameBoard *pBoard, GameObject *pPlayer) {
     while(game.pGameState->nIsAlive) {
         printBoard(pBoard);
 
-        printf("=====DASHBOARD=======\n");
-        printf("Forward: %d\n", game.pActions->nForward);
-        printf("Rotation: %d\n", game.pActions->nRotate);
-        printf("Sense: %d\n", game.pActions->nSense);
+        renderDashboard(game.pActions, game.pGameState);
 
         move = readKeyInSet(validMoves, 5);
 
