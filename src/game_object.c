@@ -111,7 +111,7 @@ ObjectTypeMetadata *getTypeMetadata(ObjectType type) {
         }
         case FLOWER: {
             metadata->type = FLOWER;
-            metadata->nIsCollissionPersistent = 1;
+            metadata->nIsCollissionPersistent = 0;
             metadata->pName = "Flower";
             metadata->pSenseName = "Scent";
             metadata->cLandmark = 'F';
