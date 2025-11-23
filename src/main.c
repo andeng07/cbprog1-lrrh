@@ -6,17 +6,22 @@ The program was run, tested, and debugged by my own efforts. I further
 certify that I have not copied in part or whole or otherwise plagiarized the
 work of other students and/or persons.
 Andrei John Sumilang, 12506346
+Antonio Imatong, 125.....
 ***************************************************************************/
 
 /*
- * Description: <Describe what this program does briefly>
- * Programmed by: Andrei John Sumilang XC23
- * Last modified: 09 November 2025
+ * Description: Little Red Riding Hood - Adventure!
+ * Programmed by: Andrei John Sumilang, Antonio Imatong XC23
+ * Last modified: 23 November 2025
  * Version: 1.0-SNAPSHOT
  * Acknowledgements:
  * - Memory allocation: https://www.youtube.com/watch?v=n_Se6bt8jM0
- * - File/Project structure: https://www.lucavall.in/blog/how-to-structure-c-projects-my-experience-best-practices
+ * - Project structure: https://www.lucavall.in/blog/how-to-structure-c-projects-my-experience-best-practices
  * - Software design principles (Coupling and Cohesion): https://www.youtube.com/watch?v=YDNR_gfBk0Q
+ * - Vararg for passing string format: https://stackoverflow.com/questions/15784729/an-example-of-use-of-varargs-in-c
+ * - Function `putchar(char)`: https://www.geeksforgeeks.org/c/putchar-function-in-c/
+ * - Console colors: https://stackoverflow.com/questions/4053837/colorizing-text-in-the-console-with-c
+ *      Note: example is provided in C, but C/C++ is interoperable, so the example is also applicable in C
  */
 
 /*
@@ -29,7 +34,7 @@ Andrei John Sumilang, 12506346
  * GitHub Repository: https://github.com/andeng07/cbprog1-lrrh
  *
  * To infinity and beyond,
- * Andrei Sumilang
+ * Andrei Sumilang & Antonio Imating
  */
 
 #include "game.h"
