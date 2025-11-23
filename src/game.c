@@ -121,6 +121,18 @@ void gameLoop(GameBoard *pBoard, GameObject *pPlayer) {
         clearScreen();
         printBoard(pBoard);
         printf("\n\n");
+
+        if (state.nIsWoodsmanPresent) {
+            char buffer[120];
+            snprintf(buffer, sizeof(buffer), "Distance from granny: %d", getDistance(pBoard, LITTLE_RED_RIDING_HOOD, GRANNY));
+            
+            setColor(getTypeColor(WOODSMAN));
+            printBoxedLine(buffer);
+            resetColor();
+
+            printf("\n\n");
+        }
+
         renderDashboard(&actions, &state);
 
         move = readKeyInSet(validMoves, 10);

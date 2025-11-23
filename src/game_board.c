@@ -95,3 +95,33 @@ int isValidPosition(GameBoard *pBoard, int nPosX, int nPosY) {
 
     return 1;
 }
+
+int getLocationOfType(GameBoard *pBoard, ObjectType type, int *nOutX, int *nOutY) {
+    int i, j, nFound = 0; 
+
+    for (i = 0; i < pBoard->nSize; i++) {
+        for (j = 0; j < pBoard->nSize; j++) {
+            if (pBoard->cells[j][i].type == type && !nFound) {
+                *nOutX = j;
+                *nOutY = i;
+                nFound = 1;
+            }
+        }
+    }
+
+    return nFound;
+}
+
+int getDistance(GameBoard *pBoard, ObjectType typeOne, ObjectType typeTwo) {
+    int nTypeOneLocX, nTypeOneLocY;
+
+    int resultOne = getLocationOfType(pBoard, typeOne, &nTypeOneLocX, &nTypeOneLocY);
+
+    int nTypeTwoLocX, nTypeTwoLocY;
+    
+    int resultTwo = getLocationOfType(pBoard, typeTwo, &nTypeTwoLocX, &nTypeTwoLocY);
+
+    if (resultOne == -1 || resultTwo == -1) return -1;
+
+    return abs(nTypeOneLocX - nTypeTwoLocX) + abs(nTypeOneLocY - nTypeTwoLocY);
+}

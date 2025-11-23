@@ -69,4 +69,27 @@ GameObject *getObjectAtPosition(GameBoard *pBoard, int nPosX, int nPosY);
  */
 int isValidPosition(GameBoard *pBoard, int nPosX, int nPosY);
 
+/* Retrieves the coordinates of the first cell matching the given type.
+ * Traverses the board from left to right, top to bottom.
+ * Precondition: pBoard must not be NULL.
+ * @param pBoard Pointer to the GameBoard.
+ * @param type The target object type to search for.
+ * @param nOutX Output pointer for the x-coordinate of the found cell (column).
+ * @param nOutY Output pointer for the y-coordinate of the found cell (row).
+ * @return 1 if found; 0 otherwise.
+ */
+int getLocationOfType(GameBoard *pBoard, ObjectType type, int *nOutX, int *nOutY);
+
+/* Computes the Manhattan distance between the first occurrences of two object types.
+ * Each type is located by scanning the board from left to right, top to bottom.
+ * Precondition: pBoard must not be NULL.
+ * @param pBoard Pointer to the GameBoard.
+ * @param typeOne The first object type.
+ * @param typeTwo The second object type.
+ * @return The Manhattan distance between the two locations.
+ *         Returns -1 if either type does not exist on the board.
+ */
+int getDistance(GameBoard *pBoard, ObjectType typeOne, ObjectType typeTwo);
+
+
 #endif /* GAME_BOARD_H */
