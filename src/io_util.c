@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <conio.h>
+#include <stdarg.h>
 
 int inputInRange(char *pPrompt, int nLowerBound, int nUpperBound) {
     int value;
@@ -66,11 +67,21 @@ char readKeyInSet(char *pValidSet, int nSetSize) {
     return value; 
 }
 
-void printCenter(char *pToPrint, int nWidth) {
-    int len = strlen(pToPrint);
+void printCenter(int nWidth, char *pToPrint, ...) {
+    char buffer[1024]; // actual string to output
 
-    int paddingLeft = (nWidth - len) / 2;
-    int paddingRight = nWidth - (len + paddingLeft);
+    int len, left, right;
 
-    printf("%*s%s%*s\n", paddingLeft, "", pToPrint, paddingRight, "");
+    va_list args;
+    va_start(args, pToPrint);
+    vsnprintf(buffer, sizeof(buffer), pToPrint, args);
+    va_end(args);
+
+    len = strlen(buffer);
+    left = (nWidth - len) / 2;
+    if (left < 0) left = 0;
+    right = nWidth - len - left;
+    if (right < 0) right = 0;
+
+    printf("%*s%s%*s", left, "", buffer, right, "");
 }

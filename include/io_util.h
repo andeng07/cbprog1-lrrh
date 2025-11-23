@@ -32,6 +32,6 @@ char readKeyInSet(char *pValidSet, int nSetSize);
  * @param pToPrint The string to print.
  * @param nWidth The total nWidth of the output area (e.g., terminal nWidth).
  */
-void printCenter(char *pToPrint, int nWidth);
+void printCenter(int nWidth, char *pToPrint, ...);
 
 #endif /* IO_UTIL_H */
