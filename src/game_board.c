@@ -101,7 +101,7 @@ int getLocationOfType(GameBoard *pBoard, ObjectType type, int *nOutX, int *nOutY
 
     for (i = 0; i < pBoard->nSize; i++) {
         for (j = 0; j < pBoard->nSize; j++) {
-            if (pBoard->cells[j][i].type == type && !nFound) {
+            if (pBoard->cells[i][j].type == type && !nFound) {
                 *nOutX = j;
                 *nOutY = i;
                 nFound = 1;
