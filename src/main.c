@@ -11,7 +11,7 @@ Antonio Imatong, 125.....
 
 /*
  * Description: Little Red Riding Hood - Adventure!
- * Programmed by: Andrei John Sumilang, Antonio Imatong XC23
+ * Programmed by: Andrei John Sumilang, Antonio Gabriel Imatong XC23
  * Last modified: 23 November 2025
  * Version: 1.0-SNAPSHOT
  * Acknowledgements:
@@ -34,7 +34,7 @@ Antonio Imatong, 125.....
  * GitHub Repository: https://github.com/andeng07/cbprog1-lrrh
  *
  * To infinity and beyond,
- * Andrei Sumilang & Antonio Imating
+ * Andrei Sumilang & Antonio Gabriel Imating
  */
 
 #include "game.h"
