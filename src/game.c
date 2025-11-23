@@ -7,8 +7,8 @@
 #include "io_util.h"
 #include "renderer.h"
 
-void inputObject(GameBoard *pBoard, ObjectType type, Status status);
-void inputMultipleObjects(GameBoard *pBoard, ObjectType type, int nCount, Status status);
+void inputObject(GameBoard *pBoard, ObjectType type, Status status); //TODO
+void inputMultipleObjects(GameBoard *pBoard, ObjectType type, int nCount, Status status); // TODO
 int processMove(Game *pGame, char cMove);
 void handleCollission(Game *pGame, GameObject *pPlayer, GameObject *pGameObject);
 void gameLoop(GameBoard *pBoard, GameObject *pPlayer);
@@ -150,7 +150,7 @@ int processMove(Game *pGame, char cMove) {
             }
             break;
         }
-        case 'a': case 'd': { /* Rotate */
+        case 'a': case 'd': case 'A': case 'D' { /* Rotate */
             RotationDirection direction = cMove == 'a' ? ROTATE_LEFT : ROTATE_RIGHT;
 
             rotate(player, direction);
@@ -224,6 +224,14 @@ void handleCollission(Game *pGame, GameObject *pPlayer, GameObject *pGameObject)
             if (pGameState->nIsBreadPresent) {
 
                 pGameState->nIsBreadPresent = 0;
+                printf ("The wolf stole your bread!\n");
+                Sleep (2000);
+                printf ("LRRH: Oh no I need to buy a new loaf of bread where can I get one?\n");
+                Sleep (4000);
+
+            } else 
+            {
+                pGameState->nIsAlive = 0;
                 printf ("The wolf caught little red riding hood!\n");
                 Sleep (2000);
                 printf ("LRRH: I really want to have a good time with grandma today...\n");
@@ -259,7 +267,7 @@ void handleCollission(Game *pGame, GameObject *pPlayer, GameObject *pGameObject)
 void gameLoop(GameBoard *pBoard, GameObject *pPlayer) {
     char move;
 
-    char validMoves[5] = { 'w','a','s','d','q' };
+    char validMoves[10] = { 'w','a','s','d','q', 'W','A','S','D','Q' };
 
     Game game;
     GameState state = {1, 0, 0, 0};
@@ -278,7 +286,7 @@ void gameLoop(GameBoard *pBoard, GameObject *pPlayer) {
 
         renderDashboard(game.pActions, game.pGameState);
 
-        move = readKeyInSet(validMoves, 5);
+        move = readKeyInSet(validMoves, 10);
 
         system("cls");
 
