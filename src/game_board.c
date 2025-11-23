@@ -121,7 +121,7 @@ int getDistance(GameBoard *pBoard, ObjectType typeOne, ObjectType typeTwo) {
     
     int resultTwo = getLocationOfType(pBoard, typeTwo, &nTypeTwoLocX, &nTypeTwoLocY);
 
-    if (resultOne == -1 || resultTwo == -1) return -1;
+    if (resultOne == 0 || resultTwo == 0) return -1;
 
     return abs(nTypeOneLocX - nTypeTwoLocX) + abs(nTypeOneLocY - nTypeTwoLocY);
 }
