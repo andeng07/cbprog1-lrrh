@@ -67,17 +67,6 @@ She can:
 **Objective:**  
 Reach Granny’s house safely **with both bread and flowers**, and **with the Woodsman’s help**.
 
----
-
-## 🏗️ Development Progress
-
-| Milestone | Description | Status |
-|:-----------|:-------------|:--------|
-| **Milestone 1** | Grid setup, movement, sensing, and counters | ✅ Completed |
-| **Milestone 2 (Final)** | Full gameplay: interactions, win/lose conditions, Woodsman integration | 🚧 In Progress |
-
----
-
 ## ⚙️ Built With
 
 - **C Programming Language**
